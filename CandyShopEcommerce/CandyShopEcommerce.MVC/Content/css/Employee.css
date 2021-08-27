@@ -1,0 +1,106 @@
+﻿body {
+    background-color: antiquewhite;
+}
+
+#tabela {
+    margin-top: 2%;
+    max-width: 98%;
+    margin-left: 3px;
+    border: 5px solid black;
+    margin-top: 20px;
+    z-index: -1;
+}
+
+.required {
+    color: red;
+}
+
+#tblCustomers {
+    margin-bottom: 2px;
+}
+
+.btnLink {
+    border: 0;
+    padding: 0;
+    display: inline;
+    background: none;
+    text-decoration: underline;
+    color: blue;
+}
+
+.btnLinkDelete {
+    border: 0;
+    padding: 0;
+    display: inline;
+    background: none;
+    text-decoration: underline;
+    color: red;
+}
+
+#qtdRegistrosExibidos {
+    margin-left: 950px;
+}
+
+.pagina {
+    color: black;
+    display: inline-block;
+}
+
+label {
+    height: 15px;
+}
+
+input[type="text"], input[type="date"] {
+    height: 25px;
+}
+
+.radio-form {
+    margin-top: 15px;
+    margin-left: 13px;
+}
+
+    .radio-form .inner-radio-form {
+        display: inline-block;
+    }
+
+        .radio-form .inner-radio-form:not(:first-child) {
+            margin-left: 15px;
+        }
+
+
+#containerFormulario {
+    max-width: 98%;
+    height: 250px;
+    background-color: #FFFAF9;
+    margin-left: 7px;
+    margin-top: 10px;
+    border: 0.5px solid black;
+    border-radius: 5px;
+}
+
+#containerFormulario2 {
+    height: 200px;
+    margin-left: 7px;
+    padding-right: 150px;
+    background-color: #FFF;
+    margin-bottom: 5px;
+    border: 0.5px solid black;
+    border-radius: 5px;
+    z-index: -1;
+}
+
+
+.btnNovo {
+    margin-left: 20px;
+}
+
+#btnSave {
+    margin-left: 5px;
+    margin-top: 5px;
+    width: 100px;
+}
+
+.container-field {
+    display: inline-block;
+    margin-left: 25px;
+}

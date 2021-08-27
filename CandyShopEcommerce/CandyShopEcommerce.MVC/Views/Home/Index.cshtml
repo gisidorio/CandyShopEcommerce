@@ -1,0 +1,513 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/css/Company.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+</head>
+<body>
+    <div id="containerFormulario">
+
+    </div>
+
+
+    <div id="tabela">
+        <h3>Endereços</h3>
+        <table id="tblCustomers" class="table table-bordered table-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>Idade</th>
+                    <th>Ativo</th>
+                    <th>Operações</th>
+                </tr>
+            </thead>
+            <tbody id="tblBody">
+                <tr>
+                    <td>1</td>
+                    <td>Gabriel</td>
+                    <td>Isidorio</td>
+                    <td>25</td>
+                    <td>Sim</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Joana</td>
+                    <td>Nayara</td>
+                    <td>29</td>
+                </tr>
+            </tbody>
+
+        </table>
+        <div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item previous"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item next"><a class="page-link" href="#">Next</a></li>
+
+                    <select id="qtdRegistrosExibidos">
+                        <option class="paginasExibidas">10</option>
+                        <option class="paginasExibidas">20</option>
+                        <option class="paginasExibidas">30</option>
+                    </select>
+                </ul>
+            </nav>
+        </div>
+
+        <button type="button" class="btn btn-success btnSalvar">Salvar</button>
+        <button type="button" class="btn btn-primary btnNovo" data-toggle="modal" data-target="#exampleModal" id="btnNovo">Novo</button>
+
+        <!-- Modal -->
+        <div class="modal fade bd-example-modal-xl show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Novo Cliente</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-field">
+                            <div>
+                                <label>Nome</label>
+                            </div>
+                            <input type="text" id="txtNome" autofocus>
+                        </div>
+                        <div class="container-field">
+                            <div>
+                                <label>Sobrenome</label>
+                            </div>
+                            <input type="text" id="txtSobrenome">
+                        </div>
+                        <div class="container-field">
+                            <div>
+                                <label>Idade</label>
+                            </div>
+                            <input type="text" id="txtIdade">
+                        </div>
+                        <div class="container-field">
+                            <div>
+                                <label>Ativo</label>
+                            </div>
+                            <input type="text" id="txtAtivo">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" id="btnAdicionar" data-dismiss="modal">Adicionar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script>
+        var numero_atual_pagina = 1;
+
+        $(function () {
+            var qtd_registros_exibidos_pagina = 10;
+            amountButtonsPage(clientes.length, qtd_registros_exibidos_pagina);
+            update(qtd_registros_exibidos_pagina, numero_atual_pagina);
+        });
+
+        var clientes = [
+            {
+                id: 1,
+                nome: 'Melissa',
+                sobrenome: 'Ferreira',
+                idade: 32,
+                ativo: true
+            },
+            {
+                id: 2,
+                nome: 'Fabiana ',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 3,
+                nome: 'Felicia',
+                sobrenome: 'Moreira',
+                idade: 32,
+                ativo: true
+            },
+            {
+                id: 4,
+                nome: 'Paula ',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 5,
+                nome: 'Mario',
+                sobrenome: 'Batista',
+                idade: 32,
+                ativo: true
+            },
+            {
+                id: 6,
+                nome: 'Laura ',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 7,
+                nome: 'Maria',
+                sobrenome: 'Proleta',
+                idade: 32,
+                ativo: true
+            },
+            {
+                id: 8,
+                nome: 'Nayla',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 9,
+                nome: 'Julia',
+                sobrenome: 'Ferreira',
+                idade: 32,
+                ativo: true
+            },
+            {
+                id: 10,
+                nome: 'Mariana',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 11,
+                nome: 'Patricia',
+                sobrenome: 'Moreira',
+                idade: 32,
+                ativo: true
+            },
+            {
+                id: 12,
+                nome: 'Novena',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 13,
+                nome: 'Prosseso',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 14,
+                nome: 'Antonia',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 15,
+                nome: 'Gabriela',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 16,
+                nome: 'Flavia',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 17,
+                nome: 'Melissa',
+                sobrenome: 'Ferreira',
+                idade: 32,
+                ativo: true
+            },
+            {
+                id: 18,
+                nome: 'Fabiana ',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 19,
+                nome: 'Felicia',
+                sobrenome: 'Moreira',
+                idade: 32,
+                ativo: true
+            },
+            {
+                id: 20,
+                nome: 'Paula ',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 21,
+                nome: 'Mario',
+                sobrenome: 'Batista',
+                idade: 32,
+                ativo: true
+            },
+            {
+                id: 22,
+                nome: 'Laura ',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 23,
+                nome: 'Maria',
+                sobrenome: 'Proleta',
+                idade: 32,
+                ativo: true
+            },
+            {
+                id: 24,
+                nome: 'Nayla',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 25,
+                nome: 'Julia',
+                sobrenome: 'Ferreira',
+                idade: 32,
+                ativo: true
+            },
+            {
+                id: 26,
+                nome: 'Mariana',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 27,
+                nome: 'Patricia',
+                sobrenome: 'Moreira',
+                idade: 32,
+                ativo: true
+            },
+            {
+                id: 28,
+                nome: 'Novena',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 29,
+                nome: 'Prosseso',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 30,
+                nome: 'Antonia',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 31,
+                nome: 'Gabriela',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 32,
+                nome: 'Flavia',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 33,
+                nome: 'Gabriela',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 34,
+                nome: 'Flavia',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            },
+            {
+                id: 35,
+                nome: 'Gabriela',
+                sobrenome: 'de Oliveira',
+                idade: 32,
+                ativo: false
+            }
+        ];
+
+        /* AO CLICAR NO NÚMERO DA PÁGINA, ELE RESGATA O NÚMERO DA PÁGINA
+           E O ATRIBUI A UMA VARIÁVEL
+           OBS: o 'on' TEM UM 'a.pagina' que é um tratamento para a inserção dinâmica de classe
+           porque o 'a.pagina' é inserido via javascript */
+        $('.pagination').on('click', 'a.pagina', function (e) {
+            e.preventDefault();
+            qtd_registros_exibidos_pagina = $('#qtdRegistrosExibidos').children('option:selected').text();
+            numero_atual_pagina = $(this).html();
+            update(qtd_registros_exibidos_pagina, numero_atual_pagina);
+        });
+
+        $('.pagination').on('click', 'li.next', function (e) {
+            e.preventDefault();
+            qtd_registros_exibidos_pagina = $('#qtdRegistrosExibidos').children('option:selected').text();
+            var qtd_botoes_criados = amountButtonsPage(clientes.length, qtd_registros_exibidos_pagina);
+            numero_atual_pagina = parseInt(numero_atual_pagina) + 1;
+            if (numero_atual_pagina > qtd_botoes_criados)
+                numero_atual_pagina = qtd_botoes_criados;
+            numero_atual_pagina = numero_atual_pagina > qtd_botoes_criados ? numero_atual_pagina = qtd_botoes_criados : numero_atual_pagina;
+            update(qtd_registros_exibidos_pagina, numero_atual_pagina);
+        });
+
+        $('.pagination').on('click', 'li.previous', function (e) {
+            e.preventDefault();
+            qtd_registros_exibidos_pagina = $('#qtdRegistrosExibidos').children('option:selected').text();
+            numero_atual_pagina -= 1;
+            numero_atual_pagina = numero_atual_pagina <= 0 ? 1 : numero_atual_pagina;
+            update(qtd_registros_exibidos_pagina, numero_atual_pagina);
+        });
+
+
+        /* AO CLICAR NO NO COMBO (SELECT), ELE RESGATA A QUANTIDADE 
+           DE REGISTROS QUE SERÃO EXIBIDOS POR PÁGINA */
+        //aqui também ocorrerá a exibição de mais de 10 páginas
+        $('#qtdRegistrosExibidos').on('change', function (e) {
+            var qtd_registros_exibidos = $(this).children('option:selected').text();
+
+            if (numero_atual_pagina > amountButtonsPage(clientes.length, qtd_registros_exibidos))
+                numero_atual_pagina = amountButtonsPage(clientes.length, qtd_registros_exibidos);
+            else
+                amountButtonsPage(clientes.length, qtd_registros_exibidos)
+
+            update(qtd_registros_exibidos, numero_atual_pagina);
+        });
+
+        /* EVENTO DO BOTÃO QUE ESTÁ NO MODAL ADICIONAR  */
+        $('#btnAdicionar').on('click', function (e) {
+            e.preventDefault();
+
+            var quantidade_paginas = $('.pagina').length;
+            qtd_registros_exibidos_pagina = $('#qtdRegistrosExibidos').children('option:selected').text();
+
+
+            var cliente = {
+                nome: $('#txtNome').val(),
+                sobrenome: $('#txtSobrenome').val(),
+                idade: $('#txtIdade').val(),
+                ativo: $('#txtAtivo').val()
+            };
+
+            clientes.push(cliente);
+            update(qtd_registros_exibidos_pagina, quantidade_paginas);
+        });
+
+        $('#btnNovo').on('click', function (e) {
+            e.preventDefault();
+
+            $('#txtNome').val('');
+            $('#txtSobrenome').val('');
+            $('#txtIdade').val('');
+            $('#txtAtivo').val('');
+
+            $('#txtNome').focus();
+        });
+
+
+        /* ATUALIZA A TABELA */
+        function update(qtd_registros_exibidos_pagina, nro_atual_pagina) {
+
+            var calculo = qtd_registros_exibidos_pagina * nro_atual_pagina;
+            var condicao_parada = calculo - qtd_registros_exibidos_pagina;
+            var i = calculo - 1;
+
+            $('#tblBody').empty();
+            while (i >= condicao_parada) {
+                if (calculo > clientes.length) {
+                    for (var indice = condicao_parada; indice < clientes.length; indice++) {
+                        var nova_linha = createRegister(indice);
+                        $('#tblBody').append(nova_linha);
+                    }
+                    break;
+                }
+
+                var nova_linha = createRegister(i);
+                $('#tblBody').prepend(nova_linha);
+                i--;
+            }
+        }
+
+        /* CRIA A NOVA LINHA/REGISTRO NA TABELA QUEM TEM A PAGINAÇÃO E RETORNA A NOVA LINHA */
+        function createRegister(indice) {
+            var nova_linha = $('<tr></tr>');
+            nova_linha = nova_linha.append('<td><a href="#">' + clientes[indice].id + '</a></td>');
+            nova_linha = nova_linha.append('<td>' + clientes[indice].nome + '</td>');
+            nova_linha = nova_linha.append('<td>' + clientes[indice].sobrenome + '</td>');
+            nova_linha = nova_linha.append('<td>' + clientes[indice].idade + '</td>');
+            nova_linha = nova_linha.append('<td>' + clientes[indice].ativo + '</td>');
+            return nova_linha;
+        }
+
+        /* CRIA A QUANTIDADE DE BOTÕES DE PÁGINA PROPORCIONALMENTE A QUANTIDADE DE REGISTROS
+           QUE SERÃO EXIBIDOS NA PÁGINA */
+        function amountButtonsPage(qtd_total_registros, qtd_registros_exibidos_pagina) {
+
+            var indice_botao = 1;
+            qtd_botoes = qtd_total_registros / qtd_registros_exibidos_pagina;
+
+            $('.pagina').remove(); // remove todos os botões
+            while (indice_botao <= qtd_botoes) {
+                var item_lista = $('<li class="page-item"></li>');
+                var link_pagina = $('<a class="page-link">' + indice_botao + '</a></li>').addClass('pagina');
+                item_lista.append(link_pagina);
+                item_lista.insertBefore('.next');
+                indice_botao++;
+            }
+
+            if (qtd_total_registros % qtd_registros_exibidos_pagina != 0) {
+                var item_lista = $('<li class="page-item"></li>');
+                var link_pagina = $('<a class="page-link">' + indice_botao + '</a></li>').addClass('pagina');
+                item_lista.append(link_pagina);
+                item_lista.insertBefore('.next');
+            }
+
+            return indice_botao;
+        }
+    </script>
+</body>
+</html>

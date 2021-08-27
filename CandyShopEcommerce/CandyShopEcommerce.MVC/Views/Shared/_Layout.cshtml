@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br" class="h-100">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/css/Layout.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+</head>
+<body class="d-flex flex-column h-100">
+    <header>
+        <nav class="navbar navbar-expand-lg menu">
+            <a class="navbar-brand logo" href="#">Little Candy Shop</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link navlink " href="#">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link navlink" href="#">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link navlink" href="#">Companies</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main" class="flex-shrink-0">
+
+        <!-- RENDER BODY SERVE PARA DIZER QUE NESSE TRECHO HAVERÁ CÓDIGO DE OUTRA PÁGINA -->
+        @RenderBody()
+
+    </main>
+
+
+
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footerMsg">Little Candy Shop &copy; All rights</p>
+        </div>
+    </footer>    
+</body>
+</html>

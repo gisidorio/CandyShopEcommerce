@@ -1,0 +1,540 @@
+﻿@model CandyShopEcommerce.MVC.ViewModels.CompanyViewModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/css/Company.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+</head>
+<body>   
+    
+                
+        <form action="/Companies/Save" method="post">
+            <div id="containerFormulario">
+                <p>Company</p>
+                <div id="containerFormulario2">
+                    <div class="container" id="elementsContainer">
+                        <input class="form-control border-dark" type="hidden" id="companyId" name="model.CompanyId" value="@Model.Id">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div>
+                                    <label for="ein">EIN</label>
+                                </div>
+                                <input class="form-control border-dark" type="text" id="ein" name="model.EIN">
+                            </div>
+
+                            <div class="col-md-4">
+                                <div>
+                                    <label for="cityName">City Name</label>
+                                </div>
+                                <input class="form-control border-dark" type="text" id="CityName" name="model.CityName" value="@Model.CityName">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="radio-form">
+                                <div class="inner-radio-form">
+                                    <label for="activated">Activated</label>
+                                    <input type="radio" name="model.Status" id="activated" value="Activated" />
+                                </div>
+
+                                <div class="inner-radio-form">
+                                    <label for="desactivated">Desactivated</label>
+                                    <input type="radio" name="model.Status" id="desactivated" value="Desactivated" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tabela">
+                <input type="hidden" id="txtProductId" />
+                <h3>Products</h3>
+                <table id="tblCustomers" class="table table-bordered table-sm">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Stock Quantity</th>
+                            <th>Operation</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblBody">
+                    </tbody>
+
+                </table>
+                <div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item previous"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item next"><a class="page-link" href="#">Next</a></li>
+
+                            <select id="qtdRegistrosExibidos">
+                                <option class="paginasExibidas">10</option>
+                                <option class="paginasExibidas">20</option>
+                                <option class="paginasExibidas">30</option>
+                            </select>
+                        </ul>
+                    </nav>
+                </div>
+                <button type="button" class="btn btn-primary btnNovo" data-toggle="modal" data-target="#exampleModal" id="btnNovo">New</button>
+            </div>
+
+            <button type="button" class="btn btn-success btnSalvar" id="btnSave">Save</button>
+        </form> 
+
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-xl show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add a new stock for the company</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table id="tblNewProduct" class="table table-bordered table-sm">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th></th>
+                                <th>Id</th>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblBodyNewProduct">
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="btnAddProduct" data-dismiss="modal">Add</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Update Product -->
+    <div class="modal fade bd-example-modal-sm show" id="ProductUpdateModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-field">
+                        <div>
+                            <label>Stock Quantity</label>
+                        </div>
+                        <input type="text" id="txtStockQuantity">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="btnUpdateStockQuantity" data-dismiss="modal">Update</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Delete Product -->
+    <div class="modal fade show" id="ProductDeleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Product Stock</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-field">
+                        <h5>This operation will delete the entire stock</h5>
+                        <br />
+                        <p>Are you sure about this?</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="btnDelete" data-dismiss="modal">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script>
+        var numero_atual_pagina = 1;
+
+        $(function () {
+            var qtd_registros_exibidos_pagina = 10;
+            amountButtonsPage(products.length, qtd_registros_exibidos_pagina);
+            update(qtd_registros_exibidos_pagina, numero_atual_pagina);
+            updateProductWithoutStock(qtd_registros_exibidos_pagina, numero_atual_pagina);
+        });
+
+        $('#btnSearch').on('click', function (e) {
+            e.preventDefault();
+
+            var CompanyObj = {
+                EIN: $('#ein').val(),
+                CityName: $('#CityName').val()
+            };
+
+            DynamicSearch(CompanyObj);
+        });
+
+        var products = @Html.Raw(Json.Encode(ViewBag.CompanyProducts));
+        var products_not_stock = @Html.Raw(Json.Encode(ViewBag.ProductsNotStock));
+        var product_obj = {};
+        var product_element_delete;
+        let stock_element;
+
+        console.log(products_not_stock)
+
+
+        /* AO CLICAR NO NÚMERO DA PÁGINA, ELE RESGATA O NÚMERO DA PÁGINA
+           E O ATRIBUI A UMA VARIÁVEL
+           OBS: o 'on' TEM UM 'a.pagina' que é um tratamento para a inserção dinâmica de classe
+           porque o 'a.pagina' é inserido via javascript */
+        $('.pagination').on('click', 'a.pagina', function (e) {
+            e.preventDefault();
+            qtd_registros_exibidos_pagina = $('#qtdRegistrosExibidos').children('option:selected').text();
+            numero_atual_pagina = $(this).html();
+            update(qtd_registros_exibidos_pagina, numero_atual_pagina);
+        });
+
+        $('.pagination').on('click', 'li.next', function (e) {
+            e.preventDefault();
+            qtd_registros_exibidos_pagina = $('#qtdRegistrosExibidos').children('option:selected').text();
+            var qtd_botoes_criados = amountButtonsPage(products.length, qtd_registros_exibidos_pagina);
+            numero_atual_pagina = parseInt(numero_atual_pagina) + 1;
+            if (numero_atual_pagina > qtd_botoes_criados)
+                numero_atual_pagina = qtd_botoes_criados;
+            numero_atual_pagina = numero_atual_pagina > qtd_botoes_criados ? numero_atual_pagina = qtd_botoes_criados : numero_atual_pagina;
+            update(qtd_registros_exibidos_pagina, numero_atual_pagina);
+        });
+
+        $('.pagination').on('click', 'li.previous', function (e) {
+            e.preventDefault();
+            qtd_registros_exibidos_pagina = $('#qtdRegistrosExibidos').children('option:selected').text();
+            numero_atual_pagina -= 1;
+            numero_atual_pagina = numero_atual_pagina <= 0 ? 1 : numero_atual_pagina;
+            update(qtd_registros_exibidos_pagina, numero_atual_pagina);
+        });
+
+
+        /* AO CLICAR NO NO COMBO (SELECT), ELE RESGATA A QUANTIDADE
+           DE REGISTROS QUE SERÃO EXIBIDOS POR PÁGINA */
+        //aqui também ocorrerá a exibição de mais de 10 páginas
+        $('#qtdRegistrosExibidos').on('change', function (e) {
+            var qtd_registros_exibidos = $(this).children('option:selected').text();
+
+            if (numero_atual_pagina > amountButtonsPage(products.length, qtd_registros_exibidos))
+                numero_atual_pagina = amountButtonsPage(products.length, qtd_registros_exibidos);
+            else
+                amountButtonsPage(products.length, qtd_registros_exibidos)
+
+            update(qtd_registros_exibidos, numero_atual_pagina);
+        });
+
+        /* EVENTO DO BOTÃO QUE ESTÁ NO MODAL ADICIONAR  */
+        $('#btnAdicionar').on('click', function (e) {
+            e.preventDefault();
+
+            var quantidade_paginas = $('.pagina').length;
+            qtd_registros_exibidos_pagina = $('#qtdRegistrosExibidos').children('option:selected').text();
+
+
+            var cliente = {
+                nome: $('#txtNome').val(),
+                sobrenome: $('#txtSobrenome').val(),
+                idade: $('#txtIdade').val(),
+                ativo: $('#txtAtivo').val()
+            };
+
+            products.push(cliente);
+            update(qtd_registros_exibidos_pagina, quantidade_paginas);
+        });
+
+        $('#tblBody').on('click', 'button#btnIdLink', function (e) {
+            e.preventDefault();
+            let product_id = $(this).html();
+            stock_element = $(this).parent().children().eq(2);
+            $('#txtProductId').val(product_id);
+        });
+
+        $('#tblBody').on('click', 'button.btnLinkDelete', function (e) {
+            e.preventDefault();
+
+            var register_id = $(this).parent().find(':first-child').html();
+
+            product_obj.CompanyId = $('#companyId').val();
+            product_obj.ProductId = register_id;
+            product_element_delete = $(this).parent();
+        });
+
+        $('#btnDelete').click(function (e) {
+            e.preventDefault();
+
+            product_obj = JSON.stringify({ 'Product': product_obj });
+
+            $.ajax({
+			    url: "@Url.Action("DeleteProduct", "Companies")",
+			    contentType: 'application/json; charset=utf-8',
+			    dataType: 'json',
+			    type: 'POST',
+                data: product_obj,
+                success: function (results) {
+                    product_element_delete.remove();
+			    },
+			    failure: function (response) {
+			    }
+		    });
+        });
+
+        $('#btnNovo').on('click', function (e) {
+            e.preventDefault();
+
+            $('#txtNome').val('');
+            $('#txtSobrenome').val('');
+            $('#txtIdade').val('');
+            $('#txtAtivo').val('');
+
+            $('#txtNome').focus();
+        });
+
+
+        /* ATUALIZA A TABELA */
+        function update(qtd_registros_exibidos_pagina, nro_atual_pagina) {
+
+            var calculo = qtd_registros_exibidos_pagina * nro_atual_pagina;
+            var condicao_parada = calculo - qtd_registros_exibidos_pagina;
+            var i = calculo - 1;
+
+            $('#tblBody').empty();
+            while (i >= condicao_parada) {
+                if (calculo > products.length) {
+                    for (var indice = condicao_parada; indice < products.length; indice++) {
+                        var nova_linha = createRegister(indice);
+                        $('#tblBody').append(nova_linha);
+                    }
+                    break;
+                }
+
+                var nova_linha = createRegister(i);
+                $('#tblBody').prepend(nova_linha);
+                i--;
+            }
+        }
+
+        /* CRIA A NOVA LINHA/REGISTRO NA TABELA QUEM TEM A PAGINAÇÃO E RETORNA A NOVA LINHA */
+        function createRegister(indice) {
+            var nova_linha = $('<tr></tr>');
+            nova_linha = nova_linha.append('<button class=\"btnLink\" data-toggle="modal" id="btnIdLink" data-target="#ProductUpdateModal">' + products[indice].ProductId +
+                '</button>');
+            nova_linha = nova_linha.append('<td>' + products[indice].Name + '</td>');
+            nova_linha = nova_linha.append('<td>' + products[indice].StockQuantity + '</td>');
+            nova_linha = nova_linha.append('<button class=\"btnLinkDelete\" data-toggle="modal" data-target="#ProductDeleteModal">' + "Delete" +
+                '</button>');
+            return nova_linha;
+        }
+
+        /* CRIA A QUANTIDADE DE BOTÕES DE PÁGINA PROPORCIONALMENTE A QUANTIDADE DE REGISTROS
+           QUE SERÃO EXIBIDOS NA PÁGINA */
+        function amountButtonsPage(qtd_total_registros, qtd_registros_exibidos_pagina) {
+
+            var indice_botao = 1;
+            qtd_botoes = qtd_total_registros / qtd_registros_exibidos_pagina;
+
+            $('.pagina').remove(); // remove todos os botões
+            while (indice_botao <= qtd_botoes) {
+                var item_lista = $('<li class="page-item"></li>');
+                var link_pagina = $('<a class="page-link">' + indice_botao + '</a></li>').addClass('pagina');
+                item_lista.append(link_pagina);
+                item_lista.insertBefore('.next');
+                indice_botao++;
+            }
+
+            if (qtd_total_registros % qtd_registros_exibidos_pagina != 0) {
+                var item_lista = $('<li class="page-item"></li>');
+                var link_pagina = $('<a class="page-link">' + indice_botao + '</a></li>').addClass('pagina');
+                item_lista.append(link_pagina);
+                item_lista.insertBefore('.next');
+            }
+
+            return indice_botao;
+        }
+
+        /* CONVERTE UMA DATA EM FORMATO JSON PARA DATA EM FORMATO JS */
+        function ToJavaScriptDate(value) {
+            var pattern = /Date\(([^)]+)\)/;
+            var results = pattern.exec(value);
+            var dt = new Date(parseFloat(results[1]));
+            return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+        }
+
+
+        /* REALIZA UMA BUSCA DINÂMICA PASSANDO UM OBJETO.
+         * ESSE OBJETO POSSUI OS VALORES DOS CAMPOS DO FORM QUE FIZEMOS A BUSCA */
+        function DynamicSearch(CompanyObj) {
+            var obj_all_empty_fields = {
+                all_empty_fields: true
+            };
+            var all_empty_fields = true;
+            var create_register = false;
+
+            $('#tblBody').empty();
+
+            for (var i = 0; i < products.length; i++) {
+                create_register = DynamicSearchConditions(CompanyObj.CityName, products[i].CityName, obj_all_empty_fields);
+
+                if (obj_all_empty_fields.all_empty_fields) {
+                    $('#tblBody').empty();
+                    update(10, 1);
+                }
+
+                if (create_register) {
+                    var novo_registro = createRegister(i);
+                    $('#tblBody').append(novo_registro);
+                }
+            }
+        }
+
+        /* REALIZA AS CONDIÇÕES PARA QUE O REGISTRO SEJA INPUTADO NA TABELA
+         * VERIFICA TAMBÉM SE TODOS OS CAMPOS SÃO VAZIOS
+         * RETORNA VERDADEIRO PARA CRIAR UM REGISTRO DA BUSCA DINÂMICA */
+        function DynamicSearchConditions(ObjAttribute, ListAttribute, obj_all_empty_fields) {
+            if (ObjAttribute != "") {
+                if (ObjAttribute == ListAttribute.substr(0, ObjAttribute.length))
+                    create_register = true;
+                else
+                    create_register = false;
+                obj_all_empty_fields.all_empty_fields = false;
+            }
+
+            return create_register;
+        }
+
+        function updateProductWithoutStock(qtd_registros_exibidos_pagina, nro_atual_pagina) {
+            qtd_registros_exibidos = 10;
+            nro_atual_pagina = 1;
+            let calculo_stock = qtd_registros_exibidos_pagina * nro_atual_pagina;
+            let condicao_parada_stock = calculo_stock - qtd_registros_exibidos_pagina;
+            let indice_stock = calculo_stock - 1;
+
+            $('#tblBodyNewProduct').empty();
+            while (indice_stock >= condicao_parada_stock) {
+                if (calculo_stock > products_not_stock.length) {
+                    for (var indice = condicao_parada_stock; indice < products_not_stock.length; indice++) {
+                        var nova_linha = createRegisterProductWithoutStock(indice);
+                        $('#tblBodyNewProduct').append(nova_linha);
+                    }
+                    break;
+                }
+
+                var nova_linha = createRegisterProductWithoutStock(indice_stock);
+                $('#tblBodyNewProduct').prepend(nova_linha);
+                i--;
+            }
+        }
+
+        function createRegisterProductWithoutStock(indice) {
+            var nova_linha = $('<tr></tr>');
+            nova_linha = nova_linha.append('<td><input type="checkbox"></td>');
+            nova_linha = nova_linha.append('<td>' + products_not_stock[indice].Id + '</td>');
+            nova_linha = nova_linha.append('<td>' + products_not_stock[indice].Name + '</td>');
+            return nova_linha;
+        }
+
+        $('#btnAddProduct').click(function (e) {
+            e.preventDefault();
+
+            // GET ALL CHECKBOX PRODUCTS SELECTED AND CONVER TO A LIST OF OBJECTS \\
+            let products_selected = $('#tblBodyNewProduct tr:has(input:checked)').map(function (i, v) {
+                var $td = $('td', this);
+                return {
+                    CompanyId: $('#companyId').val(),
+                    ProductId: $td.eq(1).text(),
+                    Name: $td.eq(2).text()
+                }
+            }).get();
+
+            console.log(products_selected);
+
+            for (let i = 0; i < products_selected.length; i++) {
+                let tr_new_product = $('<tr></tr>');
+                tr_new_product = tr_new_product.append('<button class=\"btnLink\" data-toggle="modal" id="btnIdLink" data-target="#ProductUpdateModal">' + products_selected[i].ProductId +
+                    '</button>');
+                tr_new_product = tr_new_product.append('<td>' + products_selected[i].Name + '</td>');
+                tr_new_product = tr_new_product.append('<td>' + 0 + '</td>');
+                $('#tblBody').append(tr_new_product);
+            }
+
+            products_selected = JSON.stringify({ 'productsList': products_selected });
+
+		    $.ajax({
+			    url: "@Url.Action("SaveProductsCompany", "Companies")",
+			    contentType: 'application/json; charset=utf-8',
+			    dataType: 'json',
+			    type: 'POST',
+                data: products_selected,
+			    success: function (results) {
+				    //$('#result').html('"PassThings()" successfully called.');
+				    //console.log('Requisição Assícrona realizada com sucesso ' + results);
+			    },
+			    failure: function (response) {
+				    //console.log('Falha na Requisição Assícrona' + response);
+			    }
+		    });
+        });
+
+        $('#btnUpdateStockQuantity').click(function (e) {
+            e.preventDefault();
+
+            let stock_quantity = $('#txtStockQuantity').val();
+
+            let stock_obj = {
+                CompanyId: $('#companyId').val(),
+                ProductId: $('#txtProductId').val(),
+                StockQuantity: stock_quantity
+            };
+
+            stock_obj.StockQuantity = parseInt(stock_element.html()) + parseInt(stock_obj.StockQuantity);
+            stock_element.html(stock_obj.StockQuantity);
+    
+            stock_obj = JSON.stringify({ 'productStock': stock_obj });            
+
+		    $.ajax({
+			    url: "@Url.Action("UpdateProductCompanyStock", "Companies")",
+			    contentType: 'application/json; charset=utf-8',
+			    dataType: 'json',
+			    type: 'POST',
+                data: stock_obj,
+			    success: function (results) {
+				    //$('#result').html('"PassThings()" successfully called.');
+				    //console.log('Requisição Assícrona realizada com sucesso ' + results);
+			    },
+			    failure: function (response) {
+				    //console.log('Falha na Requisição Assícrona' + response);
+			    }
+		    });
+
+            $('#txtStockQuantity').val('');
+        });
+    </script>
+</body>
+</html>

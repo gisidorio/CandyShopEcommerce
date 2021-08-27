@@ -1,0 +1,414 @@
+﻿@model List<CandyShopEcommerce.MVC.ViewModels.CompanyViewModel>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/Company.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+</head>
+<body>
+
+    <div id="containerFormulario">
+        <p>Companies</p>
+        <div id="containerFormulario2">
+            <form action="/Companies/Index" method="post">
+                <div class="container" id="elementsContainer">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div>
+                                <label for="ein">Name</label>
+                            </div>
+                            <input class="form-control border-dark" type="text" id="ein" name="model.Name">
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <label for="ein">EIN</label>
+                            </div>
+                            <input class="form-control border-dark" type="text" id="ein" name="model.EIN">
+                        </div>
+
+                        <div class="col-md-4">
+                            <div>
+                                <label for="cityName">City Name</label>
+                            </div>
+
+                            <input class="form-control border-dark" type="text" id="CityName" name="model.CityName">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div>
+                                <label for="cityName">Initial Date</label>
+                            </div>
+                            <input class="form-control border-dark" type="date" id="cityName" name="model.InitialDate">
+                        </div>
+
+                        <div class="col-md-2">
+                            <div>
+                                <label for="cityName">Final Date</label>
+                            </div>
+                            <input class="form-control border-dark" type="date" id="cityName" name="model.FinalDate">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="radio-form">
+                            <div class="inner-radio-form">
+                                <label for="all">All</label>
+                                <input type="radio" name="model.Status" id="all" value="All" />
+                            </div>
+
+                            <div class="inner-radio-form">
+                                <label for="activated">Activated</label>
+                                <input type="radio" name="model.Status" id="activated" value="Activated" />
+                            </div>
+
+                            <div class="inner-radio-form">
+                                <label for="desactivated">Desactivated</label>
+                                <input type="radio" name="model.Status" id="desactivated" value="Desactivated" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" id="btnSearch">Search</button>
+                <a class="btn btn-success" id="btnNew" href="/Companies/Create">New</a>
+            </form>
+        </div>
+    </div>
+
+
+    <div id="tabela">
+        <h3>Companies</h3>
+        <table id="tblCustomers" class="table table-bordered table-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Is Parent</th>
+                    <th>Is Activated</th>
+                    <th>Register Date</th>
+                </tr>
+            </thead>
+            <tbody id="tblBody">
+                @foreach (var company in Model)
+                {
+                    <tr>
+                        <td>
+                            <form action="/Companies/EditForm" method="post" id="editFormId">
+                                <input type="hidden" name="model.Id" value="@company.Id" />
+                                <input type="hidden" name="model.Name" value="@company.Name" />
+                                <input type="hidden" name="model.CityName" value="@company.CityName" />
+                                <input type="hidden" name="model.EIN" value="@company.EIN" />
+                                <input type="hidden" name="model.IsActivated" value="@company.IsActivated" />
+                            </form>
+                        </td>
+                        <td>Gabriel</td>
+                        <td>Isidorio</td>
+                        <td>25</td>
+                        <td>Sim</td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+        <div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item previous"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item next"><a class="page-link" href="#">Next</a></li>
+
+                    <select id="qtdRegistrosExibidos">
+                        <option class="paginasExibidas">10</option>
+                        <option class="paginasExibidas">20</option>
+                        <option class="paginasExibidas">30</option>
+                    </select>
+                </ul>
+            </nav>
+        </div>
+
+        <button type="button" class="btn btn-success btnSalvar">Salvar</button>
+        <button type="button" class="btn btn-primary btnNovo" data-toggle="modal" data-target="#exampleModal" id="btnNovo">Novo</button>
+
+        <!-- Modal -->
+        <div class="modal fade bd-example-modal-xl show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Novo Cliente</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-field">
+                            <div>
+                                <label>Nome</label>
+                            </div>
+                            <input type="text" id="txtNome" autofocus>
+                        </div>
+                        <div class="container-field">
+                            <div>
+                                <label>Sobrenome</label>
+                            </div>
+                            <input type="text" id="txtSobrenome">
+                        </div>
+                        <div class="container-field">
+                            <div>
+                                <label>Idade</label>
+                            </div>
+                            <input type="text" id="txtIdade">
+                        </div>
+                        <div class="container-field">
+                            <div>
+                                <label>Ativo</label>
+                            </div>
+                            <input type="text" id="txtAtivo">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" id="btnAdicionar" data-dismiss="modal">Adicionar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script>
+        var numero_atual_pagina = 1;
+
+        $(function () {
+            var qtd_registros_exibidos_pagina = 10;
+            amountButtonsPage(companies.length, qtd_registros_exibidos_pagina);
+            update(qtd_registros_exibidos_pagina, numero_atual_pagina);
+        });
+
+        $('#btnSearch').on('click', function (e) {
+            e.preventDefault();
+
+            var CompanyObj = {
+                EIN: $('#ein').val(),
+                CityName: $('#CityName').val()
+            };
+
+            DynamicSearch(CompanyObj);
+        });
+
+        var companies = @Html.Raw(Json.Encode(Model));
+
+
+        /* AO CLICAR NO NÚMERO DA PÁGINA, ELE RESGATA O NÚMERO DA PÁGINA
+           E O ATRIBUI A UMA VARIÁVEL
+           OBS: o 'on' TEM UM 'a.pagina' que é um tratamento para a inserção dinâmica de classe
+           porque o 'a.pagina' é inserido via javascript */
+        $('.pagination').on('click', 'a.pagina', function (e) {
+            e.preventDefault();
+            qtd_registros_exibidos_pagina = $('#qtdRegistrosExibidos').children('option:selected').text();
+            numero_atual_pagina = $(this).html();
+            update(qtd_registros_exibidos_pagina, numero_atual_pagina);
+        });
+
+        $('.pagination').on('click', 'li.next', function (e) {
+            e.preventDefault();
+            qtd_registros_exibidos_pagina = $('#qtdRegistrosExibidos').children('option:selected').text();
+            var qtd_botoes_criados = amountButtonsPage(companies.length, qtd_registros_exibidos_pagina);
+            numero_atual_pagina = parseInt(numero_atual_pagina) + 1;
+            if (numero_atual_pagina > qtd_botoes_criados)
+                numero_atual_pagina = qtd_botoes_criados;
+            numero_atual_pagina = numero_atual_pagina > qtd_botoes_criados ? numero_atual_pagina = qtd_botoes_criados : numero_atual_pagina;
+            update(qtd_registros_exibidos_pagina, numero_atual_pagina);
+        });
+
+        $('.pagination').on('click', 'li.previous', function (e) {
+            e.preventDefault();
+            qtd_registros_exibidos_pagina = $('#qtdRegistrosExibidos').children('option:selected').text();
+            numero_atual_pagina -= 1;
+            numero_atual_pagina = numero_atual_pagina <= 0 ? 1 : numero_atual_pagina;
+            update(qtd_registros_exibidos_pagina, numero_atual_pagina);
+        });
+
+
+        /* AO CLICAR NO NO COMBO (SELECT), ELE RESGATA A QUANTIDADE
+           DE REGISTROS QUE SERÃO EXIBIDOS POR PÁGINA */
+        //aqui também ocorrerá a exibição de mais de 10 páginas
+        $('#qtdRegistrosExibidos').on('change', function (e) {
+            var qtd_registros_exibidos = $(this).children('option:selected').text();
+
+            if (numero_atual_pagina > amountButtonsPage(companies.length, qtd_registros_exibidos))
+                numero_atual_pagina = amountButtonsPage(companies.length, qtd_registros_exibidos);
+            else
+                amountButtonsPage(companies.length, qtd_registros_exibidos)
+
+            update(qtd_registros_exibidos, numero_atual_pagina);
+        });
+
+        /* EVENTO DO BOTÃO QUE ESTÁ NO MODAL ADICIONAR  */
+        $('#btnAdicionar').on('click', function (e) {
+            e.preventDefault();
+
+            var quantidade_paginas = $('.pagina').length;
+            qtd_registros_exibidos_pagina = $('#qtdRegistrosExibidos').children('option:selected').text();
+
+
+            var cliente = {
+                nome: $('#txtNome').val(),
+                sobrenome: $('#txtSobrenome').val(),
+                idade: $('#txtIdade').val(),
+                ativo: $('#txtAtivo').val()
+            };
+
+            companies.push(cliente);
+            update(qtd_registros_exibidos_pagina, quantidade_paginas);
+        });
+
+        $('#btnNovo').on('click', function (e) {
+            e.preventDefault();
+
+            $('#txtNome').val('');
+            $('#txtSobrenome').val('');
+            $('#txtIdade').val('');
+            $('#txtAtivo').val('');
+
+            $('#txtNome').focus();
+        });
+
+
+        /* ATUALIZA A TABELA */
+        function update(qtd_registros_exibidos_pagina, nro_atual_pagina) {
+
+            var calculo = qtd_registros_exibidos_pagina * nro_atual_pagina;
+            var condicao_parada = calculo - qtd_registros_exibidos_pagina;
+            var i = calculo - 1;
+
+            $('#tblBody').empty();
+            while (i >= condicao_parada) {
+                if (calculo > companies.length) {
+                    for (var indice = condicao_parada; indice < companies.length; indice++) {
+                        var nova_linha = createRegister(indice);
+                        $('#tblBody').append(nova_linha);
+                    }
+                    break;
+                }
+
+                var nova_linha = createRegister(i);
+                $('#tblBody').prepend(nova_linha);
+                i--;
+            }
+        }
+
+        /* CRIA A NOVA LINHA/REGISTRO NA TABELA QUEM TEM A PAGINAÇÃO E RETORNA A NOVA LINHA */
+        function createRegister(indice) {
+            var nova_linha = $('<tr></tr>');
+            var td_id = $('<td></td>');
+            var td_form = $('<form action="/Companies/EditForm" method="post"></form>');
+            td_form.append('<input type="hidden" name="model.Id" value="' + companies[indice].Id + '"/>');
+            td_form.append('<input type="hidden" name="model.Name" value="' + companies[indice].Name + '"/>');
+            td_form.append('<input type="hidden" name="model.CityName" value="' + companies[indice].CityName + '"/>');
+            td_form.append('<input type="hidden" name="model.IsActivated" value="' + companies[indice].IsActivated + '"/>');
+            td_form.append('<input type="hidden" name="model.IsParentCompany" value="' + companies[indice].IsParentCompany + '"/>');
+            td_form.append('<input type="hidden" name="model.RegisterDate" value="' + companies[indice].RegisterDate + '"/>');
+            td_form.append('<button type="submit" class=\"btnLink\">' + companies[indice].Id + '</button>');
+            td_id.append(td_form);
+            nova_linha = nova_linha.append(td_id);
+            nova_linha = nova_linha.append('<td>' + companies[indice].Name + '</td>');
+            nova_linha = nova_linha.append('<td>' + companies[indice].CityName + '</td>');
+            nova_linha = nova_linha.append('<td>' + (companies[indice].IsActivated == true ? "Yes" : "No") + '</td>');
+            nova_linha = nova_linha.append('<td>' + (companies[indice].IsParentCompany == true ? "Yes" : "No") + '</td>');
+            nova_linha = nova_linha.append('<td>' + ToJavaScriptDate(companies[indice].RegisterDate) + '</td>');
+            return nova_linha;
+        }
+
+        /* CRIA A QUANTIDADE DE BOTÕES DE PÁGINA PROPORCIONALMENTE A QUANTIDADE DE REGISTROS
+           QUE SERÃO EXIBIDOS NA PÁGINA */
+        function amountButtonsPage(qtd_total_registros, qtd_registros_exibidos_pagina) {
+
+            var indice_botao = 1;
+            qtd_botoes = qtd_total_registros / qtd_registros_exibidos_pagina;
+
+            $('.pagina').remove(); // remove todos os botões
+            while (indice_botao <= qtd_botoes) {
+                var item_lista = $('<li class="page-item"></li>');
+                var link_pagina = $('<a class="page-link">' + indice_botao + '</a></li>').addClass('pagina');
+                item_lista.append(link_pagina);
+                item_lista.insertBefore('.next');
+                indice_botao++;
+            }
+
+            if (qtd_total_registros % qtd_registros_exibidos_pagina != 0) {
+                var item_lista = $('<li class="page-item"></li>');
+                var link_pagina = $('<a class="page-link">' + indice_botao + '</a></li>').addClass('pagina');
+                item_lista.append(link_pagina);
+                item_lista.insertBefore('.next');
+            }
+
+            return indice_botao;
+        }
+
+        /* CONVERTE UMA DATA EM FORMATO JSON PARA DATA EM FORMATO JS */
+        function ToJavaScriptDate(value) {
+            var pattern = /Date\(([^)]+)\)/;
+            var results = pattern.exec(value);
+            var dt = new Date(parseFloat(results[1]));
+            return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+        }
+
+
+        /* REALIZA UMA BUSCA DINÂMICA PASSANDO UM OBJETO.
+         * ESSE OBJETO POSSUI OS VALORES DOS CAMPOS DO FORM QUE FIZEMOS A BUSCA */
+        function DynamicSearch(CompanyObj) {
+            var obj_all_empty_fields = {
+                all_empty_fields: true
+            };
+            var all_empty_fields = true;
+            var create_register = false;
+
+            $('#tblBody').empty();
+
+            for (var i = 0; i < companies.length; i++) {
+                create_register = DynamicSearchConditions(CompanyObj.CityName, companies[i].CityName, obj_all_empty_fields);
+
+                if (obj_all_empty_fields.all_empty_fields) {
+                    $('#tblBody').empty();
+                    update(10, 1);
+                }
+
+                if (create_register) {
+                    var novo_registro = createRegister(i);
+                    $('#tblBody').append(novo_registro);
+                }
+            }
+        }
+
+        /* REALIZA AS CONDIÇÕES PARA QUE O REGISTRO SEJA INPUTADO NA TABELA
+         * VERIFICA TAMBÉM SE TODOS OS CAMPOS SÃO VAZIOS
+         * RETORNA VERDADEIRO PARA CRIAR UM REGISTRO DA BUSCA DINÂMICA */
+        function DynamicSearchConditions(ObjAttribute, ListAttribute, obj_all_empty_fields) {
+            if (ObjAttribute != "") {
+                if (ObjAttribute == ListAttribute.substr(0, ObjAttribute.length))
+                    create_register = true;
+                else
+                    create_register = false;
+                obj_all_empty_fields.all_empty_fields = false;
+            }
+
+            return create_register;
+        }
+    </script>
+</body>
+</html>

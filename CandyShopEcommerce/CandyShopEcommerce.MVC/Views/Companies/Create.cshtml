@@ -1,0 +1,240 @@
+﻿@model List<CandyShopEcommerce.Domain.Entities.City>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/css/Company.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+</head>
+<body>    
+
+    <form action="/Companies/Save" method="post">
+        <div id="containerFormulario">
+            <p>Company</p>
+            <div id="containerFormulario2">
+                <div class="container" id="elementsContainer">
+                    <input class="form-control border-dark" type="hidden" id="companyId" name="model.CompanyId">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div>
+                                <label for="name"><span class="required">*</span> Name</label>
+                            </div>
+                            <input class="form-control border-dark" type="text" id="txtName" name="model.Name">
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <label for="ein"><span class="required">*</span> EIN</label>
+                            </div>
+                            <input class="form-control border-dark" type="text" id="txtEIN" name="model.EIN">
+                        </div>
+
+                        <div class="col-md-4">
+                            <div>
+                                <label for="cityName"><span class="required">*</span> City Name</label>
+                            </div>
+                            <select id="slctCity" name="model.CityId">
+                                @foreach (var city in Model)
+                                {
+                                    <option value="@city.Id">@city.CityName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="radio-form">
+                            <div class="inner-radio-form">
+                                <label for="activated">Activated</label>
+                                <input type="radio" name="model.IsActivated" id="rbActivated" value="true" checked />
+                            </div>
+
+                            <div class="inner-radio-form">
+                                <label for="desactivated">Desactivated</label>
+                                <input type="radio" name="model.IsActivated" id="rbDesactivated" value="false" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success btnSalvar" id="btnSave" data-toggle="modal" data-target="#ProductSaveModal">Save</button>
+        <button type="button" class="btn btn-secondary" id="btnNewStock" data-dismiss="modal" data-toggle="modal" data-target="#StockSaveModal">Add Stock</button>
+    </form>
+
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-xl show" id="StockSaveModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add a new stock for the company</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table id="tblNewProduct" class="table table-bordered table-sm">
+                        <thead style="background-color: #FF00FF; color: white">
+                            <tr>
+                                <th></th>
+                                <th>Id</th>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblBodyNewProduct">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <form action="/Companies/Index" method="post">
+                        <button type="submit" class="btn btn-success" id="btnAddProduct" data-dismiss="modal">Add</button>
+                        <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Delete Product -->
+    <div class="modal fade show" id="ProductSaveModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Do you want to add stock?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-field">
+                        <h5>This operation can create several stocks for this company</h5>
+                        <br />
+                        <p>Are you sure about this?</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <form action="/Companies/Index" method="post">
+                        <button type="button" class="btn btn-success" id="btnNewStock" data-dismiss="modal" data-toggle="modal" data-target="#StockSaveModal">Yes</button>
+                        <button type="submit" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script>
+        var products_not_stock = @Html.Raw(Json.Encode(ViewBag.ProductsNotStock));
+
+        $(function () {
+            var qtd_registros_exibidos_pagina = 10;
+            //amountButtonsPage(products.length, qtd_registros_exibidos_pagina);
+            //update(qtd_registros_exibidos_pagina, numero_atual_pagina);
+            updateProductWithoutStock(10, 1);
+        });
+
+        function updateProductWithoutStock(qtd_registros_exibidos_pagina, nro_atual_pagina) {
+            qtd_registros_exibidos = 10;
+            nro_atual_pagina = 1;
+            let calculo_stock = qtd_registros_exibidos_pagina * nro_atual_pagina;
+            let condicao_parada_stock = calculo_stock - qtd_registros_exibidos_pagina;
+            let indice_stock = calculo_stock - 1;
+
+            $('#tblBodyNewProduct').empty();
+            while (indice_stock >= condicao_parada_stock) {
+                if (calculo_stock > products_not_stock.length) {
+                    for (var indice = condicao_parada_stock; indice < products_not_stock.length; indice++) {
+                        var nova_linha = createRegisterProductWithoutStock(indice);
+                        $('#tblBodyNewProduct').append(nova_linha);
+                    }
+                    break;
+                }
+
+                var nova_linha = createRegisterProductWithoutStock(indice_stock);
+                $('#tblBodyNewProduct').prepend(nova_linha);
+                indice_stock--;
+            }
+        }
+
+        function createRegisterProductWithoutStock(indice) {
+            var nova_linha = $('<tr></tr>');
+            nova_linha = nova_linha.append('<td><input type="checkbox"></td>');
+            nova_linha = nova_linha.append('<td>' + products_not_stock[indice].Id + '</td>');
+            nova_linha = nova_linha.append('<td>' + products_not_stock[indice].Name + '</td>');
+            return nova_linha;
+        }
+
+        @*$('#btnSave').click(function (e) {
+            e.preventDefault();
+
+            let company_obj = {
+                Name: $('#txtName').val(),
+                EIN: $('#txtEIN').val(),
+                CityId: $('#slctCity').val(),
+                IsActivated: $('#rbActivated:checked') ? true : false
+            };
+
+            company_obj = JSON.stringify({ 'model': company_obj });
+
+            console.log(company_obj);
+
+		    $.ajax({
+			    url: "@Url.Action("Save", "Companies")",
+			    contentType: 'application/json; charset=utf-8',
+			    dataType: 'json',
+			    type: 'POST',
+                data: company_obj,
+			    success: function (results) {
+				    //$('#result').html('"PassThings()" successfully called.');
+				    //console.log('Requisição Assícrona realizada com sucesso ' + results);
+			    },
+			    failure: function (response) {
+				    //console.log('Falha na Requisição Assícrona' + response);
+			    }
+		    });
+        });*@
+
+        $('#btnAddProduct').click(function (e) {
+            e.preventDefault();
+
+            // GET ALL CHECKBOX PRODUCTS SELECTED AND CONVER TO A LIST OF OBJECTS \\
+            let products_selected = $('#tblBodyNewProduct tr:has(input:checked)').map(function (i, v) {
+                var $td = $('td', this);
+                return {
+                    CompanyId: $('#companyId').val(),
+                    ProductId: $td.eq(1).text(),
+                    Name: $td.eq(2).text()
+                }
+            }).get();
+
+            products_selected = JSON.stringify({ 'productsList': products_selected });
+
+		    $.ajax({
+			    url: "@Url.Action("ListProductsForSave", "Companies")",
+			    contentType: 'application/json; charset=utf-8',
+			    dataType: 'json',
+			    type: 'POST',
+                data: products_selected,
+			    success: function (results) {
+				    //$('#result').html('"PassThings()" successfully called.');
+				    //console.log('Requisição Assícrona realizada com sucesso ' + results);
+			    },
+			    failure: function (response) {
+				    //console.log('Falha na Requisição Assícrona' + response);
+			    }
+		    });
+        });
+    </script>
+</body>
+</html>

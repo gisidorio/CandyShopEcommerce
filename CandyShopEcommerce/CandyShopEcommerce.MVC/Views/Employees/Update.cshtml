@@ -1,0 +1,151 @@
+﻿@model CandyShopEcommerce.MVC.ViewModels.EmployeeViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/css/Employee.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+</head>
+<body>
+
+    <form action="/Employees/Save" method="post">
+        <div id="containerFormulario">
+            <p>Employee</p>
+            <div id="containerFormulario2">
+                <div class="container" id="elementsContainer">
+                    <input type="hidden" id="txtId" name="model.Id" value="@Model.Id">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div>
+                                <label for="name"><span class="required">*</span>Name</label>
+                            </div>
+                            <input class="form-control border-dark" type="text" id="txtName" name="model.Name" value="@Model.Name">
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <label for="ein"><span class="required">*</span>SSN</label>
+                            </div>
+                            <input class="form-control border-dark" type="text" id="txtEIN" name="model.SSN" value="@Model.SSN">
+                        </div>
+
+                        <div class="col-md-2">
+                            <div>
+                                <label for="ein"><span class="required">*</span>Salary</label>
+                            </div>
+                            <input class="form-control border-dark" type="text" id="txtEIN" name="model.Salary" value="@Model.Salary">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div>
+                                <label for="cityName"><span class="required">*</span>Company</label>
+                            </div>
+                            <select id="slctCompanies" name="model.CompanyId" value="@Model.CompanyId">
+                                <option value="@Model.CompanyId">@Model.CompanyName</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div>
+                                <label for="cityName"><span class="required">*</span>Department</label>
+                            </div>
+                            <select id="slctDepartments" name="model.DepartmentId" value="@Model.DepartmentId">
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div>
+                                <label for="cityName"><span class="required">*</span>Position</label>
+                            </div>
+                            <select id="slctPositions" name="model.PositionId" value="@Model.PositionId">
+                                <option value="@Model.PositionId">@Model.PositionName</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="radio-form">
+                            <div class="inner-radio-form">
+                                <label for="activated">Activated</label>
+                                <input type="radio" name="model.IsActivated" id="rbActivated" value="true" />
+                            </div>
+
+                            <div class="inner-radio-form">
+                                <label for="desactivated">Desactivated</label>
+                                <input type="radio" name="model.IsActivated" id="rbDesactivated" value="false" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="radio-form">
+
+                            <label for="ein"><span class="required">*</span>Gender:</label>
+
+                            <div class="inner-radio-form">
+                                <label for="activated">Male</label>
+                                <input type="radio" name="model.Gender" id="Male" value="Male" />
+                            </div>
+
+                            <div class="inner-radio-form">
+                                <label for="desactivated">Female</label>
+                                <input type="radio" name="model.Gender" id="Female" value="Female" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success btnSalvar" id="btnSave">Save</button>
+    </form>
+
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script>
+        let companies = @Html.Raw(Json.Encode(ViewBag.Companies));
+        let departments = @Html.Raw(Json.Encode(ViewBag.Departments));
+        let positions = @Html.Raw(Json.Encode(ViewBag.Positions));
+
+        let employee = @Html.Raw(Json.Encode(Model))
+
+        $(function () {
+            BuildSelect($('#slctCompanies'), companies);
+            BuildSelect($('#slctDepartments'), departments);
+            BuildSelect($('#slctPositions'), positions);
+            InitializeRadios();
+        });
+
+        function BuildSelect(slct, elements_list) {
+            elements_list.forEach(function (element) {
+                let opt = $('<option value="' + element.Id + '">' + element.Name + '</option>');
+                slct.append(opt);
+            });
+        }
+
+        console.log(employee);
+
+        function InitializeRadios() {
+            if (employee.IsActivated == true)
+                $('#rbActivated').attr('checked', true);
+            else
+                $('#rbDesactivated').attr('checked', true);
+
+            if (employee.Gender == 'Male')
+                $('#Male').attr('checked', true);
+            else
+                $('#Female').attr('checked', true);
+        }
+
+    </script>
+</body>
+</html>
+

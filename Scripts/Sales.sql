@@ -1,0 +1,8 @@
+USE LittleCandyShop
+GO
+
+CREATE TABLE Sales
+(
+	Id		BIGINT NOT NULL IDENTITY,
+	
+)
