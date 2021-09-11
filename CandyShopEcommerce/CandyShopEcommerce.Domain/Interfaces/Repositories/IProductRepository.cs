@@ -9,5 +9,6 @@ namespace CandyShopEcommerce.Domain.Interfaces.Repositories
 {
     public interface IProductRepository : IRepositoryBase<Product>
     {
+        List<Product> GetAllProductsHome(Product entity);
     }
 }

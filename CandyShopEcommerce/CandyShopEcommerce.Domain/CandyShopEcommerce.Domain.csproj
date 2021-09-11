@@ -12,6 +12,10 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -81,6 +85,10 @@
     <Compile Include="Entities\CompanyProduct.cs" />
     <Compile Include="Entities\Department.cs" />
     <Compile Include="Entities\Employee.cs" />
+    <Compile Include="Entities\FAQ.cs" />
+    <Compile Include="Entities\Image.cs" />
+    <Compile Include="Entities\Keyword.cs" />
+    <Compile Include="Entities\KeywordProduct.cs" />
     <Compile Include="Entities\Position.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\User.cs" />
@@ -90,6 +98,10 @@
     <Compile Include="Interfaces\Repositories\ICompanyRepository.cs" />
     <Compile Include="Interfaces\Repositories\IDepartmentRepository.cs" />
     <Compile Include="Interfaces\Repositories\IEmployeeRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IFAQRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IImageRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IKeywordProductRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IKeywordRepository.cs" />
     <Compile Include="Interfaces\Repositories\IPositionRepository.cs" />
     <Compile Include="Interfaces\Repositories\IProductRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRepositoryBase.cs" />
@@ -100,15 +112,24 @@
     <Compile Include="Interfaces\Services\ICompanyService.cs" />
     <Compile Include="Interfaces\Services\IDepartmentService.cs" />
     <Compile Include="Interfaces\Services\IEmployeeService.cs" />
+    <Compile Include="Interfaces\Services\IFAQService.cs" />
+    <Compile Include="Interfaces\Services\IImageService.cs" />
+    <Compile Include="Interfaces\Services\IKeywordProductService.cs" />
+    <Compile Include="Interfaces\Services\IKeywordService.cs" />
     <Compile Include="Interfaces\Services\IPositionService.cs" />
     <Compile Include="Interfaces\Services\IProductService.cs" />
     <Compile Include="Interfaces\Services\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CityService.cs" />
+    <Compile Include="Services\ClientService.cs" />
     <Compile Include="Services\CompanyProductService.cs" />
     <Compile Include="Services\CompanyService.cs" />
     <Compile Include="Services\DepartmentService.cs" />
     <Compile Include="Services\EmployeeService.cs" />
+    <Compile Include="Services\FAQService.cs" />
+    <Compile Include="Services\ImageService.cs" />
+    <Compile Include="Services\KeywordProductService.cs" />
+    <Compile Include="Services\KeywordService.cs" />
     <Compile Include="Services\PositionService.cs" />
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="Services\UserService.cs" />

@@ -33,9 +33,14 @@ namespace CandyShopEcommerce.Domain.Services
             return _iUserRepository.GetAll(entity);
         }
 
+        public User Login(User entity)
+        {
+            return _iUserRepository.Login(entity);
+        }
+
         public int Save(User entity)
         {
-            throw new NotImplementedException();
+            return _iUserRepository.Save(entity);
         }
 
         public void Update(User entity)

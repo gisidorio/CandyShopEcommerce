@@ -32,6 +32,7 @@ BEGIN
 	SET NOCOUNT ON
 	INSERT INTO Clients(Person, [Name], EIN, SSN, Gender, Email, Phone, IsActivated, RegisterDate)
 	VALUES (@Person, @Name, @EIN, @SSN, @Gender, @Email, @Phone, 1, GETDATE())
+	SELECT SCOPE_IDENTITY() 
 END
 GO
 

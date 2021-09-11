@@ -9,5 +9,6 @@ namespace CandyShopEcommerce.Domain.Interfaces.Repositories
 {
     public interface IUserRepository : IRepositoryBase<User>
     {
+        User Login(User entity);
     }
 }

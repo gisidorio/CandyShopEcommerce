@@ -1,0 +1,335 @@
+﻿@model CandyShopEcommerce.MVC.ViewModels.UserViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Update</title>
+    <style>
+        body {
+            background-color: #FFB6C1;
+        }
+        /*
+                body, html {
+                    height: 100%;
+                    background-repeat: no-repeat;
+                    background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
+                }
+        */
+        .card-container.card {
+            max-width: 1200px;
+            padding: 40px 40px;
+        }
+
+        .btn {
+            font-weight: 700;
+            height: 36px;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+            cursor: default;
+        }
+
+        /*
+         * Card component
+         */
+        .card {
+            background-color: white;
+            /* just in case there no content*/
+            padding: 20px 25px 30px;
+            margin: 0 auto 25px;
+            margin-top: 50px;
+            /* shadows and rounded borders */
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+            -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-img-card {
+            width: 96px;
+            height: 96px;
+            margin: 0 auto 10px;
+            display: block;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+        }
+
+        /*
+         * Form styles
+         */
+        .profile-name-card {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0 0;
+            min-height: 1em;
+        }
+
+        .reauth-email {
+            display: block;
+            color: #404040;
+            line-height: 2;
+            margin-bottom: 10px;
+            font-size: 14px;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .form-signin #inputEmail,
+        .form-signin #inputPassword {
+            direction: ltr;
+            height: 44px;
+            font-size: 16px;
+        }
+
+        .form-signin input[type=email],
+        .form-signin input[type=password],
+        .form-signin input[type=text] {
+            width: 100%;
+            display: inline-block;
+            margin-bottom: 10px;
+            z-index: 1;
+            position: relative;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .form-signin .form-control:focus {
+            border-color: #FF00FF;
+            outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+        }
+
+        .btn.btn-signin {
+            /*background-color: #4d90fe; */
+            background-color: #FF00FF;
+            /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+            padding: 0px;
+            width: 70px;
+            font-weight: 700;
+            font-size: 14px;
+            height: 36px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            border: none;
+            -o-transition: all 0.218s;
+            -moz-transition: all 0.218s;
+            -webkit-transition: all 0.218s;
+            transition: all 0.218s;
+        }
+
+        #btnNext {
+            /*background-color: #4d90fe; */
+            background-color: #FF00FF;
+            /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+            padding: 0px;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            width: 120px;
+            height: 36px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            border: none;
+            -o-transition: all 0.218s;
+            -moz-transition: all 0.218s;
+            -webkit-transition: all 0.218s;
+            transition: all 0.218s;
+        }
+
+        #btnSaveFAQ {
+            /*background-color: #4d90fe; */
+            background-color: #FF00FF;
+            /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+            padding: 0px;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            width: 120px;
+            height: 36px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            border: none;
+            -o-transition: all 0.218s;
+            -moz-transition: all 0.218s;
+            -webkit-transition: all 0.218s;
+            transition: all 0.218s;
+        }
+
+        #btnCancel {
+            /*background-color: #4d90fe; */
+            background-color: #FFB6C1;
+            /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+            padding: 0px;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            width: 120px;
+            height: 36px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            border: none;
+            -o-transition: all 0.218s;
+            -moz-transition: all 0.218s;
+            -webkit-transition: all 0.218s;
+            transition: all 0.218s;
+        }
+
+        #btnNext:hover {
+            background-color: #FFB6C1;
+        }
+
+        .btn-block {
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .btn-buttons {
+            margin-top: 20px;
+        }
+
+        .btn.btn-signin:hover,
+        .btn.btn-signin:active,
+        .btn.btn-signin:focus {
+            background-color: #FFB6C1;
+        }
+
+        .forgot-password {
+            color: #FF00FF;
+        }
+
+            .forgot-password:hover,
+            .forgot-password:active,
+            .forgot-password:focus {
+                color: #FFB6C1;
+            }
+
+        h3 {
+            text-align: center;
+            color: white;
+        }
+
+        .radio-form {
+            margin-top: 15px;
+            margin-left: 13px;
+        }
+
+            .radio-form .inner-radio-form {
+                display: inline-block;
+            }
+
+                .radio-form .inner-radio-form:not(:first-child) {
+                    margin-left: 15px;
+                }
+
+        #vertical-row {
+            border-left: 1px solid black;
+            height: 300px;
+            margin-left: 50px;
+        }
+
+        .product-info {
+            display: block;
+        }
+
+        .btnDetail {
+            display: inline-block;
+        }
+
+        .btnLink {
+            border: 0;
+            padding: 0;
+            display: inline;
+            background: none;
+            text-decoration: underline;
+            color: blue;
+        }
+
+        .table-title {
+            color: black;
+            margin-bottom: 10px;
+        }
+
+        .row:not(:first-child), .row:not(:last-child) {
+            margin-top: 20px;
+        }
+
+        #txtAreaQuestion, #txtAreaAnswer {
+            width: 900px;
+            height: 100px;
+        }
+
+        #txtAreaDescription {
+            width: 100%;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card card-container">
+            <form action="/Users/Save" method="post" id="juridicalPForm">
+                <input type="hidden" value="@Model.Id" name="model.Id"/>
+                <div class="container" id="elementsContainer">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12">
+                            <div>
+                                <label for="ein">Password</label>
+                            </div>
+                            <input class="form-control form-control-sm border-dark" type="text" id="ein" name="model.Password" value="@Model.Password">
+                        </div>
+
+                        <div class="col-12">
+                            <label>Status</label>
+                            <div>
+                                @if (Model.IsActivated == true)
+                                {
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="model.IsActivated" id="inlineRadio2" value="1" checked>
+                                        <label class="form-check-label" for="inlineRadio2">Activated</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="model.IsActivated" id="inlineRadio3" value="0">
+                                        <label class="form-check-label" for="inlineRadio3">Desactivated</label>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="model.IsActivated" id="inlineRadio2" value="1">
+                                        <label class="form-check-label" for="inlineRadio2">Activated</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="model.IsActivated" id="inlineRadio3" value="0">
+                                        <label class="form-check-label" for="inlineRadio3">Desactivated</label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-12 btn-buttons">
+                            <button class="btn btn-lg btn-primary btn-block" id="btnNext" type="submit">Save</button>
+                            <button type="button" class="btn btn-lg btn-primary btn-block" id="btnCancel">Back</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+</body>
+</html>

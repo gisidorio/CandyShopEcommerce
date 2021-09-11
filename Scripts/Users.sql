@@ -5,7 +5,7 @@ CREATE TABLE Users
 (
 	Id			INT NOT NULL IDENTITY,
 	Username	VARCHAR(60) NOT NULL,
-	[Password]	VARCHAR(40) NOT NULL,
+	[Password]	VARCHAR(MAX) NOT NULL,
 	ClientId	INT,
 	EmployeeId	INT,
 	IsActivated BIT NOT NULL,

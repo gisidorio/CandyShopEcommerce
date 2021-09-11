@@ -3,40 +3,55 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
-    <link rel="stylesheet" type="text/css" href="~/Content/css/Layout.css" />
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/MenuNavbar.css" />
     <script src="~/Scripts/jquery-3.0.0.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/bootstrap.bundle.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
-<body class="d-flex flex-column h-100">
+<body>
     <header>
-        <nav class="navbar navbar-expand-lg menu">
-            <a class="navbar-brand logo" href="#">Little Candy Shop</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
-                        <a class="nav-link navlink " href="#">Home<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link navlink" href="#">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link navlink" href="#">Companies</a>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+        @*<nav class="menu">
+            <input type="checkbox" id="check"/>
+            <label for="check" class="checkbtn">
+                <i class="fas fa-bars"></i>
+            </label>
+            <label class="logo">Little Candy Shop</label>
+            <div class="search-element">
+                <input id="txtSearch" type="text" style="height: 35px;" />
+                <button style="background-color: white;"><img src="~/Content/img/magnifying-glass.png" /></button>
             </div>
+            <ul id="nav-bar-menu-list">
+                <li><a class="active" href="/Products">Products</a></li>
+                <li><a class="active" href="#">Employees</a></li>
+                <li><a class="active" href="#">Users</a></li>
+            </ul>
+        </nav>*@    
+
+        <!-- MENU COM A SEARCH BOX AO MEIO -->
+        <input type="checkbox" id="check"/> 
+        <nav id="menu-navbar">
+            <div class="logo">Little Candy Shop</div>
+            <div class="search-box">
+                <input type="search" placeholder="Search here"/>
+                <span class="fa fa-search"></span>
+            </div>
+
+            <ol>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Users</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Products</a></li>
+            </ol>
+
+            <label for="check" class="bar">
+                <span class="fa fa-bars" id="bars"></span>
+                <span class="fa fa-times" id="times"></span>
+            </label>
         </nav>
-    </header>
+    </header>    
 
     <main role="main" class="flex-shrink-0">
 
@@ -48,10 +63,10 @@
 
 
 
-    <footer class="footer">
+    @*<footer class="footer">
         <div class="container">
             <p class="footerMsg">Little Candy Shop &copy; All rights</p>
         </div>
-    </footer>    
+    </footer>*@
 </body>
 </html>

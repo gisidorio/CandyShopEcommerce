@@ -23,8 +23,7 @@ GO
 SET NOCOUNT ON
 INSERT INTO Employees([Name], SSN, Gender, Salary, CompanyId, DepartmentId, PositionId, IsActivated, RegisterDate)
 VALUES ('Cedric Greer', 5796438512, 'Male', 50000, 1, 4, 1, 1, GETDATE())
-INSERT INTO Employees([Name], SSN, Gender, Salary, CompanyId, DepartmentId, PositionId, IsActivated, RegisterDate)
-VALUES ('Brenda Smith', 5796438512, 'Female', 5500.56, 1, 4, 4, 1, GETDATE())
+
 
 SELECT	*
 FROM	Employees

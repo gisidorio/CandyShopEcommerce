@@ -1,0 +1,363 @@
+﻿/** {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.menu {
+    background-color: #ff00ff;
+    height: 80px;
+    width: 100%;
+}
+
+.logo {
+    color: white;
+    font-size: 25px;
+    line-height: 80px;
+    padding: 0 10px;
+    font-weight: bold;
+}
+
+.menu #nav-bar-menu-list {
+    float: right;
+    margin-right: 10px;
+    text-decoration: none;
+    list-style: none;
+}
+
+.menu #nav-bar-menu-list li {
+    display: inline-block;
+    line-height: 10px;
+    margin: 0 5px;
+}
+
+.menu #nav-bar-menu-list li a {
+    color: white;
+    font-size: 17px;
+ 
+}
+
+a.active, a:hover {
+    transition: .5s;
+}
+
+.checkbtn {
+    font-size: 30px;
+    color: white;
+    float: right;
+    line-height: 50px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+
+#check {
+    display: none;
+}
+
+.menu #txtSearch {
+    width: 75%;
+    margin-left: 5px;
+}
+
+.menu .search-element, #nav-bar-menu-list {
+    display: inline-block;
+}
+
+.search-element {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 300px;
+}
+
+@media (max-width: 952px)  {
+    label.logo {
+        font-size: 25px;
+        padding-left: 50px;
+    }
+    .menu #nav-bar-menu-list li a {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 858px) {
+    .checkbtn {
+        display: block;
+    }
+
+    #nav-bar-menu-list {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        top: 80px;
+        left: -100%;
+        text-align: center;
+        transition: all .5s;
+        z-index: 1;
+    }
+
+    .menu #nav-bar-menu-list li {
+        display: block;
+        padding-bottom: -60px;
+        border-bottom: 1px solid #ff00ff;
+    }
+
+    .menu #nav-bar-menu-list li a {
+        font-size: 15px;
+    }
+
+    a:hover {
+        background: none;
+        text-decoration: none;
+        color: #ff00ff;
+    }
+    #check:checked ~ ul {
+        left: 0;
+    }
+
+    .menu {
+       height: 130px;
+    }
+
+    .menu #txtSearch {
+        float: left;
+        width: 70%;
+        margin-left: 5px;
+    }
+
+    .search-element {
+        display: inline-flex;
+        justify-content: center;
+        width: 100%;
+    }
+}*/
+
+/*@media screen and (min-width: 878px) and (max-width: 900px) {
+    .search-element {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        width: 300px;
+    }
+}
+
+@media screen and (min-width: 901px) and (max-width: 946px) {
+    .search-element {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        width: 449px;
+    }
+}*/
+
+
+/* MENU COM A SEARCH BOX NO MEIO */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#menu-navbar {
+    display: flex;
+    width: 100%;
+    background: #ff00ff;
+    position: relative;
+    justify-content: space-between;
+    text-align: center;
+    padding: 15px 30px;
+}
+
+#menu-navbar .logo {
+    font-size: 35px;
+    font-weight: 800;
+    color: #fff;
+    cursor: pointer;
+}
+
+#menu-navbar ol {
+    display: flex;
+    list-style: none;
+    margin: auto 0;
+}
+
+#menu-navbar ol li {
+    margin: 0 2px;
+}
+
+#menu-navbar ol li a {
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    padding: 5px 10px;
+}
+
+#menu-navbar ol li:hover a {
+    color: white;
+}
+
+#menu-navbar .search-box {
+    display: flex;
+    margin: auto 0;
+    height: 35px;
+    line-height: 35px;
+}
+
+#menu-navbar .search-box input {
+    border: none;
+    outline: none;
+    background: #fff;
+    height: 100%;
+    padding: 0 10px;
+    font-size: 20px;
+    width: 350px;
+}
+
+#menu-navbar .search-box span {
+    color: black;
+    font-size: 20px;
+    background: #fff;
+    height: 100%;
+    padding: 8px;
+    position: relative;
+    cursor: pointer;
+    z-index: 1;
+}
+
+#menu-navbar .search-box span:hover {
+
+}
+
+#menu-navbar .search-box span::after {
+    height: 100%;
+    width: 0%;
+    content: '';
+    background: #ff00ff;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    transition: 0.3s;
+}
+
+#menu-navbar .bar {
+    position: relative;
+    margin: auto;
+    display: none;
+}
+
+#menu-navbar .bar span {
+    position: absolute;
+    color: #fff;
+    font-size: 35px;
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    display: none;
+}
+
+@media screen and (max-width: 1250px) {
+    #menu-navbar {
+        display: block;
+        padding: 0;
+    }
+
+    #menu-navbar .logo {
+        display: inline-block;
+        padding: 15px 30px;
+    }
+    #menu-navbar .search-box {
+        width: 100%;
+        display: inline-block;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+
+    #menu-navbar .search-box input {
+        width: 90%;            
+    }
+
+    #menu-navbar ol {
+        position: absolute;
+        font-size: 5px;display: flex;
+        flex-direction: column;
+        background-color: #000;
+        height: 0;
+        width: 100%;
+        visibility: hidden;
+        transition: 0.3s;
+        z-index: 1;
+    }
+
+    #menu-navbar ol li:nth-child(1) {
+        transform: translateX(150px);
+    }
+
+    #menu-navbar ol li:nth-child(2) {
+        transform: translateX(150px);
+    }
+
+    #menu-navbar ol li:nth-child(3) {
+        transform: translateX(150px);
+    }
+
+    #menu-navbar ol li:nth-child(4) {
+        transform: translateX(150px);
+    }
+
+    #menu-navbar ol li {
+        text-align: center;
+        border-bottom: 1px solid #FFB6C1;
+        transition: 0.3s 0.1s all;
+        opacity: 0;
+    }
+
+    #menu-navbar ol li a {
+        color: #ff00ff;
+        font-size: 15px;
+        padding: 15px;
+        display: block;
+    }
+
+    #menu-navbar .bar {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 80px;
+        cursor: pointer;
+    }
+
+    #menu-navbar .bar #times {
+        display: none;
+    }
+
+     /*CHANGE THE ICON 'X' TO HAMBURGER */
+    #check:checked ~ nav .bar #times {
+        display: block;
+    }
+    #check:checked ~ nav .bar #bars {
+        display: none;
+    }
+
+    #check:checked ~ nav ol {
+        visibility: visible;
+        height: 465px;
+        position: absolute;
+    }
+
+    #check:checked ~ nav ol li:nth-child(1),
+    #check:checked ~ nav ol li:nth-child(2),
+    #check:checked ~ nav ol li:nth-child(3),
+    #check:checked ~ nav ol li:nth-child(4) {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}

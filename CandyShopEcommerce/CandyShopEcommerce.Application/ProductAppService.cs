@@ -33,14 +33,19 @@ namespace CandyShopEcommerce.Application
             return _iProductService.GetAll(entity);
         }
 
+        public List<Product> GetAllProductsHome(Product entity)
+        {
+            return _iProductService.GetAllProductsHome(entity);
+        }
+
         public int Save(Product entity)
         {
-            throw new NotImplementedException();
+            return _iProductService.Save(entity);
         }
 
         public void Update(Product entity)
         {
-            throw new NotImplementedException();
+            _iProductService.Update(entity);
         }
     }
 }

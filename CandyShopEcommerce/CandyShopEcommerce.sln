@@ -59,4 +59,26 @@ Global
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {82A0CE87-FACD-4073-866A-9704FC46AFD4}
 	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://dev.azure.com/gabrielgoncalves2008
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = CandyShopEcommerce.Application\\CandyShopEcommerce.Application.csproj
+		SccProjectTopLevelParentUniqueName1 = CandyShopEcommerce.sln
+		SccProjectName1 = CandyShopEcommerce.Application
+		SccLocalPath1 = CandyShopEcommerce.Application
+		SccProjectUniqueName2 = CandyShopEcommerce.Domain\\CandyShopEcommerce.Domain.csproj
+		SccProjectTopLevelParentUniqueName2 = CandyShopEcommerce.sln
+		SccProjectName2 = CandyShopEcommerce.Domain
+		SccLocalPath2 = CandyShopEcommerce.Domain
+		SccProjectUniqueName3 = CandyShopEcommerce.Infra.Data\\CandyShopEcommerce.Infra.Data.csproj
+		SccProjectTopLevelParentUniqueName3 = CandyShopEcommerce.sln
+		SccProjectName3 = CandyShopEcommerce.Infra.Data
+		SccLocalPath3 = CandyShopEcommerce.Infra.Data
+		SccProjectUniqueName4 = CandyShopEcommerce.MVC\\CandyShopEcommerce.MVC.csproj
+		SccProjectTopLevelParentUniqueName4 = CandyShopEcommerce.sln
+		SccProjectName4 = CandyShopEcommerce.MVC
+		SccLocalPath4 = CandyShopEcommerce.MVC
+	EndGlobalSection
 EndGlobal

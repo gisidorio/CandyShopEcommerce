@@ -32,8 +32,7 @@ namespace CandyShopEcommerce.Infra.Data.Repositories
                 entity.Password,
                 entity.ClientId,
                 entity.EmployeeId,
-                entity.IsActivated,
-                entity.RegisterDate
+                entity.IsActivated
             };
 
             try
@@ -52,9 +51,58 @@ namespace CandyShopEcommerce.Infra.Data.Repositories
             return users;
         }
 
+        public User Login(User entity)
+        {
+            User user = null;
+
+            var parameters = new
+            {
+                entity.Username,
+                entity.Password
+            };
+
+            try
+            {
+                user = base.Query(Procedures.sp_login, parameters);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                base.Dispose();
+            }
+
+            return user;
+        }
+
         public int Save(User entity)
         {
-            throw new NotImplementedException();
+            var UserId = 0;
+
+            var parameters = new
+            {
+                entity.Username,
+                entity.Password,
+                entity.ClientId,
+                entity.EmployeeId
+            };
+
+            try
+            {
+                UserId = base.Save(Procedures.sp_insert_user, parameters);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                base.Dispose();
+            }
+
+            return UserId;
         }
 
         public void Update(User entity)

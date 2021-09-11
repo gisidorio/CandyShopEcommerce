@@ -86,11 +86,6 @@ namespace CandyShopEcommerce.MVC.App_Start
             kernel.Bind<ICityService>().To<CityService>();
             kernel.Bind<ICityRepository>().To<CityRepository>();
 
-            // USERS
-            kernel.Bind<IUserAppService>().To<UserAppService>();
-            kernel.Bind<IUserService>().To<UserService>();
-            kernel.Bind<IUserRepository>().To<UserRepository>();
-
             // EMPLOYEES
             kernel.Bind<IEmployeeAppService>().To<EmployeeAppService>();
             kernel.Bind<IEmployeeService>().To<EmployeeService>();
@@ -105,6 +100,36 @@ namespace CandyShopEcommerce.MVC.App_Start
             kernel.Bind<IPositionAppService>().To<PositionAppService>();
             kernel.Bind<IPositionService>().To<PositionService>();
             kernel.Bind<IPositionRepository>().To<PositionRepository>();
+
+            // CLIENTS
+            kernel.Bind<IClientAppService>().To<ClientAppService>();
+            kernel.Bind<IClientService>().To<ClientService>();
+            kernel.Bind<IClientRepository>().To<ClientRepository>();
+
+            // USERS
+            kernel.Bind<IUserAppService>().To<UserAppService>();
+            kernel.Bind<IUserService>().To<UserService>();
+            kernel.Bind<IUserRepository>().To<UserRepository>();
+
+            // FAQS
+            kernel.Bind<IFAQAppService>().To<FAQAppService>();
+            kernel.Bind<IFAQService>().To<FAQService>();
+            kernel.Bind<IFAQRepository>().To<FAQRepository>();
+
+            // IMAGES
+            kernel.Bind<IImageAppService>().To<ImageAppService>();
+            kernel.Bind<IImageService>().To<ImageService>();
+            kernel.Bind<IImageRepository>().To<ImageRepository>();
+
+            // KEYWORDS
+            kernel.Bind<IKeywordAppService>().To<KeywordAppService>();
+            kernel.Bind<IKeywordService>().To<KeywordService>();
+            kernel.Bind<IKeywordRepository>().To<KeywordRepository>();
+
+            // KEYWORDS X PRODUCTS
+            kernel.Bind<IKeywordProductAppService>().To<KeywordProductAppService>();
+            kernel.Bind<IKeywordProductService>().To<KeywordProductService>();
+            kernel.Bind<IKeywordProductRepository>().To<KeywordProductRepository>();
         }
     }
 }

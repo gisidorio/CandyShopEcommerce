@@ -1,0 +1,121 @@
+﻿body {
+}
+
+h1 {
+    
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.card {
+    margin-left: 20px;
+    margin-top: 120px;
+    border: 1px solid black;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.con {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-left: 60px;    
+}
+
+.card-text {
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    color: black;
+}
+
+.price {
+    font-weight: bold;
+}
+
+#btnItem {
+    background: transparent;
+    border: none !important;
+    z-index: -2;
+}
+
+
+@media screen and (min-width: 0px) and (max-width: 599px) {
+    .con {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-left: 80px;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 700px) {
+    .con {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-left: 180px;
+    }
+}
+
+@media screen and (min-width: 720px) and (max-width: 800px) {
+    .con {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-left: 80px;
+    }
+}
+
+@media screen and (min-width: 900px) and (max-width: 1019px) {
+    .con {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-left: 180px;
+    }
+}
+
+@media screen and (min-width: 1020px) and (max-width: 1119px) {
+    .con {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-left: 80px;
+    }
+}
+
+@media screen and (min-width: 1120px) and (max-width: 1316px) {
+    .con {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-left: 180px;
+    }
+}
+
+@media screen (max-width: 1317px) {
+    .con {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-left: 30px;
+    }
+}
+
+
+
+
+
+

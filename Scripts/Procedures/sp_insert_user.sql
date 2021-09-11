@@ -11,9 +11,9 @@ GO
 CREATE PROCEDURE sp_insert_user
 (	
 	@Username				VARCHAR(60) = NULL,
-	@Password				VARCHAR(9) = NULL,
-	@ClientId				VARCHAR(8) = NULL,
-	@EmployeeId				NUMERIC(8, 2) = NULL,
+	@Password				VARCHAR(MAX) = NULL,
+	@ClientId				INT = NULL,
+	@EmployeeId				INT = NULL,
 	@IsActivated			BIT = 0	
 )
 AS
@@ -29,7 +29,7 @@ DATE            TASK        AUTHOR           GOAL
 BEGIN
 	SET NOCOUNT ON
 	INSERT INTO Users(Username, [Password], ClientId, EmployeeId, IsActivated, RegisterDate)
-	VALUES (@Username, @Password, @ClientId, @EmployeeId, @IsActivated, GETDATE())
+	VALUES (@Username, @Password, @ClientId, @EmployeeId, 1, GETDATE())
 END
 GO
 
@@ -38,5 +38,3 @@ BEGIN
 	PRINT '<<< PROCEDURE sp_insert_user WAS SUCESSFULLY CREATED >>>'
 END
 
-SELECT	*
-FROM	Clients

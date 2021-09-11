@@ -14,5 +14,8 @@ namespace CandyShopEcommerce.Application.Interfaces
         void Update(User entity);
         int Save(User entity);
         void Delete(User entity);
+        User Login(User entity);
+        string Encrypt(string decrypted);
+        string Decrypt(string encrypted);
     }
 }

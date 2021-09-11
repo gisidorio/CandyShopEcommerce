@@ -1,0 +1,353 @@
+﻿
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+    <style>
+        body {
+            background-color: #FFB6C1;
+        }
+        /*
+                body, html {
+                    height: 100%;
+                    background-repeat: no-repeat;
+                    background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
+                }
+        */
+        .card-container.card {
+            max-width: 1200px;
+            padding: 40px 40px;
+        }
+
+        .btn {
+            font-weight: 700;
+            height: 36px;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+            cursor: default;
+        }
+
+        /*
+         * Card component
+         */
+        .card {
+            background-color: white;
+            /* just in case there no content*/
+            padding: 20px 25px 30px;
+            margin: 0 auto 25px;
+            margin-top: 50px;
+            /* shadows and rounded borders */
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+            -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-img-card {
+            width: 96px;
+            height: 96px;
+            margin: 0 auto 10px;
+            display: block;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+        }
+
+        /*
+         * Form styles
+         */
+        .profile-name-card {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0 0;
+            min-height: 1em;
+        }
+
+        .reauth-email {
+            display: block;
+            color: #404040;
+            line-height: 2;
+            margin-bottom: 10px;
+            font-size: 14px;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .form-signin #inputEmail,
+        .form-signin #inputPassword {
+            direction: ltr;
+            height: 44px;
+            font-size: 16px;
+        }
+
+        .form-signin input[type=email],
+        .form-signin input[type=password],
+        .form-signin input[type=text] {
+            width: 100%;
+            display: inline-block;
+            margin-bottom: 10px;
+            z-index: 1;
+            position: relative;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .form-signin .form-control:focus {
+            border-color: #FF00FF;
+            outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+        }
+
+        .btn.btn-signin {
+            /*background-color: #4d90fe; */
+            background-color: #FF00FF;
+            /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+            padding: 0px;
+            width: 70px;
+            font-weight: 700;
+            font-size: 14px;
+            height: 36px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            border: none;
+            -o-transition: all 0.218s;
+            -moz-transition: all 0.218s;
+            -webkit-transition: all 0.218s;
+            transition: all 0.218s;
+        }
+
+        #btnNext {
+            /*background-color: #4d90fe; */
+            background-color: #FF00FF;
+            /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+            padding: 0px;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            width: 100px;
+            height: 36px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            border: none;
+            -o-transition: all 0.218s;
+            -moz-transition: all 0.218s;
+            -webkit-transition: all 0.218s;
+            transition: all 0.218s;
+        }
+
+        #btnCancel {
+            /*background-color: #4d90fe; */
+            background-color: #FFB6C1;
+            /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+            padding: 0px;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            width: 100px;
+            height: 36px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            border: none;
+            -o-transition: all 0.218s;
+            -moz-transition: all 0.218s;
+            -webkit-transition: all 0.218s;
+            transition: all 0.218s;
+        }
+
+        #btnNext:hover {
+            background-color: #FFB6C1;
+        }
+
+        .btn.btn-signin:hover,
+        .btn.btn-signin:active,
+        .btn.btn-signin:focus {
+            background-color: #FFB6C1;
+        }
+
+        .forgot-password {
+            color: #FF00FF;
+        }
+
+            .forgot-password:hover,
+            .forgot-password:active,
+            .forgot-password:focus {
+                color: #FFB6C1;
+            }
+
+        h3 {
+            text-align: center;
+            color: white;
+        }
+
+        .radio-form {
+            margin-top: 15px;
+            margin-left: 13px;
+        }
+
+            .radio-form .inner-radio-form {
+                display: inline-block;
+            }
+
+                .radio-form .inner-radio-form:not(:first-child) {
+                    margin-left: 15px;
+                }
+    </style>
+</head>
+<body>
+    <div style="background-color: black; height: 50px; width: 100%">
+        <h3>Login or register</h3>
+    </div>
+
+
+    <div class="container">
+        <div class="card card-container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="radio-form">
+                        <div class="inner-radio-form">
+                            <label for="all">Juridical Person</label>
+                            <input type="radio" name="model.Status" id="juridicalPerson" value="All" />
+                        </div>
+
+                        <div class="inner-radio-form">
+                            <label for="activated">Physical Person</label>
+                            <input type="radio" name="model.Status" id="physicalPerson" value="Activated" checked />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form action="/Clients/Save" method="post" id="juridicalPForm">
+                <input type="hidden" value="Juridical" name="model.Person"/>
+                <div class="container" id="elementsContainer">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <div>
+                                <label for="ein">Name</label>
+                            </div>
+                            <input class="form-control form-control-sm border-dark" type="text" id="ein" name="model.Name">
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <div>
+                                <label for="cityName">Email</label>
+                            </div>
+                            <input class="form-control form-control-sm border-dark" type="text" id="cityName" name="model.InitialDate">
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+                            <div>
+                                <label for="ein">EIN</label>
+                            </div>
+                            <input class="form-control form-control-sm border-dark" type="text" id="ein" name="model.EIN">
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+                            <div>
+                                <label for="cityName">Phone</label>
+                            </div>
+                            <input type="text" class="form-control  form-control-sm border-dark" name="telefone" id="telefone" data-mask="(000)000-0000" data-mask-selectonfocus="true" />
+                        </div>                        
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+                            <button class="btn btn-lg btn-primary btn-block" id="btnNext" type="submit">Next</button>
+                            <button type="button" class="btn btn-lg btn-primary btn-block" id="btnCancel">Cancel</button>
+                        </div>
+                    </div>
+                </div>                
+            </form>
+
+            <form action="/Clients/Save" method="post" id="physicalPForm">
+                <input type="hidden" value="Physical" name="model.Person" />
+                <div class="container" id="elementsContainer">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div>
+                                <label for="ein">Name</label>
+                            </div>
+                            <input class="form-control form-control-sm border-dark" type="text" id="ein" name="model.Name">
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <label for="ein">SSN</label>
+                            </div>
+                            <input class="form-control form-control-sm border-dark" type="text" id="ein" name="model.SSN">
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <label for="cityName">Email</label>
+                            </div>
+                            <input class="form-control  form-control-sm border-dark" type="text" id="cityName" name="model.Email">
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <label for="cityName">Phone</label>
+                            </div>
+                            <input type="text" class="form-control  form-control-sm border-dark" name="model.Phone" id="telefone" data-mask="(000)000-0000" data-mask-selectonfocus="true" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="radio-form">
+                            <div class="inner-radio-form">
+                                <label for="all">Male</label>
+                                <input type="radio" name="model.Gender" id="male" value="Male" />
+                            </div>
+
+                            <div class="inner-radio-form">
+                                <label for="activated">Female</label>
+                                <input type="radio" name="model.Gender" id="female" value="Female" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" id="btnNext" type="submit">Next</button>
+                <button type="button" id="btnCancel">Cancel</button>
+            </form>
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/jquery.mask.js"></script>
+    <script>
+
+        $(function () {
+            $('#physicalPForm').show();
+            $('#juridicalPForm').hide();
+            CreateInputMask();
+        });
+
+        $('#juridicalPerson').click(function () {
+            $('#physicalPForm').hide();
+            $('#juridicalPForm').show();
+        });
+
+        $('#physicalPerson').click(function () {
+
+            $('#physicalPForm').show();
+            $('#juridicalPForm').hide();
+
+        });
+
+        function CreateInputMask() {
+            $('#telefone').mask('(000)000-0000');
+        }
+    </script>
+</body>
+</html>

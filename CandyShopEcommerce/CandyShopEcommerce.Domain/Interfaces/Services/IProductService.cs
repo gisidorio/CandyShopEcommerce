@@ -14,5 +14,6 @@ namespace CandyShopEcommerce.Domain.Interfaces.Services
         void Update(Product entity);
         int Save(Product entity);
         void Delete(Product entity);
+        List<Product> GetAllProductsHome(Product entity);
     }
 }

@@ -1,4 +1,4 @@
-﻿@model List<CandyShopEcommerce.MVC.ViewModels.EmployeeViewModel>
+﻿@model List<CandyShopEcommerce.MVC.ViewModels.UserViewModel>
 
 <!DOCTYPE html>
 
@@ -6,200 +6,378 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
-    <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery-ui.min.css" />
-    <link rel="stylesheet" type="text/css" href="~/Content/css/Employee.css" />
-    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
-    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/bootstrap.bundle.js"></script>
-    <script src="~/Scripts/bootstrap-datepicker.js"></script>
-    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+
+    <style>
+        body {
+            background-color: #FFB6C1;
+        }
+        /*
+                body, html {
+                    height: 100%;
+                    background-repeat: no-repeat;
+                    background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
+                }
+        */
+        .card-container.card {
+            max-width: 1200px;
+            padding: 40px 40px;
+        }
+
+        .btn {
+            font-weight: 700;
+            height: 36px;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+            cursor: default;
+        }
+
+        /*
+         * Card component
+         */
+        .card {
+            background-color: white;
+            /* just in case there no content*/
+            padding: 20px 25px 30px;
+            margin: 0 auto 25px;
+            margin-top: 50px;
+            /* shadows and rounded borders */
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+            -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-img-card {
+            width: 96px;
+            height: 96px;
+            margin: 0 auto 10px;
+            display: block;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+        }
+
+        /*
+         * Form styles
+         */
+        .profile-name-card {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0 0;
+            min-height: 1em;
+        }
+
+        .reauth-email {
+            display: block;
+            color: #404040;
+            line-height: 2;
+            margin-bottom: 10px;
+            font-size: 14px;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .form-signin #inputEmail,
+        .form-signin #inputPassword {
+            direction: ltr;
+            height: 44px;
+            font-size: 16px;
+        }
+
+        .form-signin input[type=email],
+        .form-signin input[type=password],
+        .form-signin input[type=text] {
+            width: 100%;
+            display: inline-block;
+            margin-bottom: 10px;
+            z-index: 1;
+            position: relative;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .form-signin .form-control:focus {
+            border-color: #FF00FF;
+            outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+        }
+
+        .btn.btn-signin {
+            /*background-color: #4d90fe; */
+            background-color: #FF00FF;
+            /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+            padding: 0px;
+            width: 70px;
+            font-weight: 700;
+            font-size: 14px;
+            height: 36px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            border: none;
+            -o-transition: all 0.218s;
+            -moz-transition: all 0.218s;
+            -webkit-transition: all 0.218s;
+            transition: all 0.218s;
+        }
+
+        #btnNext {
+            /*background-color: #4d90fe; */
+            background-color: #FF00FF;
+            /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+            padding: 0px;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            width: 120px;
+            height: 36px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            border: none;
+            -o-transition: all 0.218s;
+            -moz-transition: all 0.218s;
+            -webkit-transition: all 0.218s;
+            transition: all 0.218s;
+        }
+
+        #btnCancel {
+            /*background-color: #4d90fe; */
+            background-color: #FFB6C1;
+            /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+            padding: 0px;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            width: 120px;
+            height: 36px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            border: none;
+            -o-transition: all 0.218s;
+            -moz-transition: all 0.218s;
+            -webkit-transition: all 0.218s;
+            transition: all 0.218s;
+        }
+
+        #btnNew {
+            /*background-color: #4d90fe; */
+            background-color: #000000;
+            /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+            padding: 0px;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            width: 120px;
+            height: 36px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            border: none;
+            -o-transition: all 0.218s;
+            -moz-transition: all 0.218s;
+            -webkit-transition: all 0.218s;
+            transition: all 0.218s;
+        }
+
+        #btnNext:hover {
+            background-color: #FFB6C1;
+        }
+
+        .btn-block {
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .btn-buttons {
+            margin-top: 20px;
+        }
+
+        .btn.btn-signin:hover,
+        .btn.btn-signin:active,
+        .btn.btn-signin:focus {
+            background-color: #FFB6C1;
+        }
+
+        .forgot-password {
+            color: #FF00FF;
+        }
+
+            .forgot-password:hover,
+            .forgot-password:active,
+            .forgot-password:focus {
+                color: #FFB6C1;
+            }
+
+        h3 {
+            text-align: center;
+            color: white;
+        }
+
+        .radio-form {
+            margin-top: 15px;
+            margin-left: 13px;
+        }
+
+            .radio-form .inner-radio-form {
+                display: inline-block;
+            }
+
+                .radio-form .inner-radio-form:not(:first-child) {
+                    margin-left: 15px;
+                }
+
+        #vertical-row {
+            border-left: 1px solid black;
+            height: 300px;
+            margin-left: 50px;
+        }
+
+        .product-info {
+            display: block;
+        }
+
+        .btnDetail {
+            display: inline-block;
+        }
+
+        .btnLink {
+            border: 0;
+            padding: 0;
+            display: inline;
+            background: none;
+            text-decoration: underline;
+            color: blue;
+        }
+
+        .table-title {
+            color: black;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
+    
+    <div class="container">
+        <div class="card card-container">
 
-    <div id="containerFormulario">
-        <p>Employees</p>
-        <div id="containerFormulario2">
-            <form action="/Employees/Index" method="post">
+            <form action="/Users/Index" method="post" id="juridicalPForm">
+                <input type="hidden" value="Juridical" />
                 <div class="container" id="elementsContainer">
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-12 col-sm-12 col-md-8 col-lg-6">
                             <div>
-                                <label for="ein">Name</label>
+                                <label for="ein">Username</label>
                             </div>
-                            <input class="form-control border-dark" type="text" id="ein" name="model.Name">
-                        </div>
-                        <div class="col-md-2">
-                            <div>
-                                <label for="ein">EIN</label>
-                            </div>
-                            <input class="form-control border-dark" type="text" id="ein" name="model.EIN">
+                            <input class="form-control form-control-sm border-dark" type="text" id="ein" name="model.Username">
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-12">
+                            <label>Status</label>
                             <div>
-                                <label for="cityName">City Name</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="model.IsActivated" id="inlineRadio2" value="1">
+                                    <label class="form-check-label" for="inlineRadio2">Activated</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="model.IsActivated" id="inlineRadio3" value="0">
+                                    <label class="form-check-label" for="inlineRadio3">Desactivated</label>
+                                </div>
                             </div>
-
-                            <input class="form-control border-dark" type="text" id="CityName" name="model.CityName">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div>
-                                <label for="cityName">Initial Date</label>
-                            </div>
-                            <input class="form-control border-dark" type="date" id="cityName" name="model.InitialDate">
                         </div>
 
-                        <div class="col-md-2">
-                            <div>
-                                <label for="cityName">Final Date</label>
-                            </div>
-                            <input class="form-control border-dark" type="date" id="cityName" name="model.FinalDate">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="radio-form">
-                            <div class="inner-radio-form">
-                                <label for="all">All</label>
-                                <input type="radio" name="model.Status" id="all" value="All" />
-                            </div>
-
-                            <div class="inner-radio-form">
-                                <label for="activated">Activated</label>
-                                <input type="radio" name="model.Status" id="activated" value="Activated" />
-                            </div>
-
-                            <div class="inner-radio-form">
-                                <label for="desactivated">Desactivated</label>
-                                <input type="radio" name="model.Status" id="desactivated" value="Desactivated" />
-                            </div>
+                        <div class="col-md-12 btn-buttons">
+                            <button class="btn btn-lg btn-primary btn-block" id="btnNext" type="submit">Search</button>
+                            <button type="button" class="btn btn-lg btn-primary btn-block" id="btnCancel">Cancel</button>
+                            <a href="/Users/Create"><button type="button" class="btn btn-lg btn-primary btn-block" id="btnNew">New</button></a>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" id="btnSearch">Search</button>
-                <a class="btn btn-success" id="btnNew" href="/Employees/Create">New</a>
             </form>
-        </div>
-    </div>
+        </div><!-- /card-container -->
+    </div><!-- /container -->
 
 
-    <div id="tabela">
-        <h3>Employees</h3>
-        <table id="tblCustomers" class="table table-bordered table-sm">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>SSN</th>
-                    <th>Gender</th>
-                    <th>Salary</th>
-                    <th>Company</th>
-                    <th>Department</th>
-                    <th>Position</th>
-                    <th>IsActivated</th>
-                    <th>Register Date</th>
-                </tr>
-            </thead>
-            <tbody id="tblBody">
-                @foreach (var company in Model)
-                {
-                    <tr>
-                        @*<td>
-                                <form action="/Companies/Update" method="post" id="editFormId">
-                                    <input type="hidden" name="model.Id" value="@company.Id" />
-                                    <input type="hidden" name="model.Name" value="@company.Name" />
-                                    <input type="hidden" name="model.CityName" value="@company.CityName" />
-                                    <input type="hidden" name="model.EIN" value="@company.EIN" />
-                                    <input type="hidden" name="model.IsActivated" value="@company.IsActivated" />
-                                </form>
-                            </td>*@
-                        <td>Gabriel</td>
-                        <td>Isidorio</td>
-                        <td>25</td>
-                        <td>Sim</td>
-                    </tr>
-                }
-            </tbody>
+    <div class="container">
+        <div class="card card-container">
+            <div id="tabela">
+                <h3 class="table-title">Users</h3>
+                <table id="tblCustomers" class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Username</th>
+                            <th>Client</th>
+                            <th>Employee</th>
+                            <th>Is Activated</th>
+                            <th>Register Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblBody">
+                        @*@foreach (var company in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <form action="/Companies/EditForm" method="post" id="editFormId">
+                                            <input type="hidden" name="model.Id" value="@company.Id" />
+                                            <input type="hidden" name="model.Name" value="@company.Name" />
+                                            <input type="hidden" name="model.CityName" value="@company.CityName" />
+                                            <input type="hidden" name="model.EIN" value="@company.EIN" />
+                                            <input type="hidden" name="model.IsActivated" value="@company.IsActivated" />
+                                        </form>
+                                    </td>
+                                    <td>Gabriel</td>
+                                    <td>Isidorio</td>
+                                    <td>25</td>
+                                    <td>Sim</td>
+                                </tr>
+                            }*@
+                    </tbody>
 
-        </table>
-        <div>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item previous"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item next"><a class="page-link" href="#">Next</a></li>
+                </table>
+                <div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item previous"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item next"><a class="page-link" href="#">Next</a></li>
 
-                    <select id="qtdRegistrosExibidos">
-                        <option class="paginasExibidas">10</option>
-                        <option class="paginasExibidas">20</option>
-                        <option class="paginasExibidas">30</option>
-                    </select>
-                </ul>
-            </nav>
-        </div>
-
-        <button type="button" class="btn btn-success btnSalvar">Salvar</button>
-        <button type="button" class="btn btn-primary btnNovo" data-toggle="modal" data-target="#exampleModal" id="btnNovo">Novo</button>
-
-        <!-- Modal -->
-        <div class="modal fade bd-example-modal-xl show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Novo Cliente</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-field">
-                            <div>
-                                <label>Nome</label>
-                            </div>
-                            <input type="text" id="txtNome" autofocus>
-                        </div>
-                        <div class="container-field">
-                            <div>
-                                <label>Sobrenome</label>
-                            </div>
-                            <input type="text" id="txtSobrenome">
-                        </div>
-                        <div class="container-field">
-                            <div>
-                                <label>Idade</label>
-                            </div>
-                            <input type="text" id="txtIdade">
-                        </div>
-                        <div class="container-field">
-                            <div>
-                                <label>Ativo</label>
-                            </div>
-                            <input type="text" id="txtAtivo">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" id="btnAdicionar" data-dismiss="modal">Adicionar</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    </div>
+                            <select id="qtdRegistrosExibidos">
+                                <option class="paginasExibidas">10</option>
+                                <option class="paginasExibidas">20</option>
+                                <option class="paginasExibidas">30</option>
+                            </select>
+                        </ul>
+                    </nav>
                 </div>
+
+                <button type="button" class="btn btn-success btnSalvar">Salvar</button>
+                <button type="button" class="btn btn-primary btnNovo" data-toggle="modal" data-target="#exampleModal" id="btnNovo">Novo</button>
+
             </div>
         </div>
     </div>
 
-    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
-    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-    <script src="~/Scripts/jquery-3.0.0.js"></script>
-    <script>
+            <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+            <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+            <script src="~/Scripts/jquery-3.0.0.js"></script>
+            <script>
         var numero_atual_pagina = 1;
 
         $(function () {
             var qtd_registros_exibidos_pagina = 10;
-            amountButtonsPage(employees.length, qtd_registros_exibidos_pagina);
+            amountButtonsPage(users.length, qtd_registros_exibidos_pagina);
             update(qtd_registros_exibidos_pagina, numero_atual_pagina);
         });
 
@@ -214,8 +392,8 @@
             DynamicSearch(CompanyObj);
         });
 
-        var employees = @Html.Raw(Json.Encode(Model));
-        console.log(employees);
+        var users = @Html.Raw(Json.Encode(Model));
+        console.log(users);
 
         /* AO CLICAR NO NÚMERO DA PÁGINA, ELE RESGATA O NÚMERO DA PÁGINA
            E O ATRIBUI A UMA VARIÁVEL
@@ -231,7 +409,7 @@
         $('.pagination').on('click', 'li.next', function (e) {
             e.preventDefault();
             qtd_registros_exibidos_pagina = $('#qtdRegistrosExibidos').children('option:selected').text();
-            var qtd_botoes_criados = amountButtonsPage(employees.length, qtd_registros_exibidos_pagina);
+            var qtd_botoes_criados = amountButtonsPage(users.length, qtd_registros_exibidos_pagina);
             numero_atual_pagina = parseInt(numero_atual_pagina) + 1;
             if (numero_atual_pagina > qtd_botoes_criados)
                 numero_atual_pagina = qtd_botoes_criados;
@@ -254,10 +432,10 @@
         $('#qtdRegistrosExibidos').on('change', function (e) {
             var qtd_registros_exibidos = $(this).children('option:selected').text();
 
-            if (numero_atual_pagina > amountButtonsPage(employees.length, qtd_registros_exibidos))
-                numero_atual_pagina = amountButtonsPage(employees.length, qtd_registros_exibidos);
+            if (numero_atual_pagina > amountButtonsPage(users.length, qtd_registros_exibidos))
+                numero_atual_pagina = amountButtonsPage(users.length, qtd_registros_exibidos);
             else
-                amountButtonsPage(employees.length, qtd_registros_exibidos)
+                amountButtonsPage(users.length, qtd_registros_exibidos)
 
             update(qtd_registros_exibidos, numero_atual_pagina);
         });
@@ -277,7 +455,7 @@
                 ativo: $('#txtAtivo').val()
             };
 
-            employees.push(cliente);
+            users.push(cliente);
             update(qtd_registros_exibidos_pagina, quantidade_paginas);
         });
 
@@ -302,8 +480,8 @@
 
             $('#tblBody').empty();
             while (i >= condicao_parada) {
-                if (calculo > employees.length) {
-                    for (var indice = condicao_parada; indice < employees.length; indice++) {
+                if (calculo > users.length) {
+                    for (var indice = condicao_parada; indice < users.length; indice++) {
                         var nova_linha = createRegister(indice);
                         $('#tblBody').append(nova_linha);
                     }
@@ -320,32 +498,24 @@
         function createRegister(indice) {
             var nova_linha = $('<tr></tr>');
             var td_id = $('<td></td>');
-            var td_form = $('<form action="/Employees/Update" method="post"></form>');
-            td_form.append('<input type="hidden" name="model.Id" value="' + employees[indice].Id + '"/>');
-            td_form.append('<input type="hidden" name="model.Name" value="' + employees[indice].Name + '"/>');
-            td_form.append('<input type="hidden" name="model.SSN" value="' + employees[indice].SSN + '"/>');
-            td_form.append('<input type="hidden" name="model.Gender" value="' + employees[indice].Gender + '"/>');
-            td_form.append('<input type="hidden" name="model.Salary" value="' + employees[indice].Salary + '"/>');
-            td_form.append('<input type="hidden" name="model.CompanyId" value="' + employees[indice].CompanyId + '"/>');
-            td_form.append('<input type="hidden" name="model.CompanyName" value="' + employees[indice].CompanyName + '"/>');
-            td_form.append('<input type="hidden" name="model.DepartmentId" value="' + employees[indice].DepartmentId + '"/>');
-            td_form.append('<input type="hidden" name="model.DepartmentName" value="' + employees[indice].DepartmentName + '"/>');
-            td_form.append('<input type="hidden" name="model.PositionId" value="' + employees[indice].PositionId + '"/>');
-            td_form.append('<input type="hidden" name="model.PositionName" value="' + employees[indice].PositionName + '"/>');
-            td_form.append('<input type="hidden" name="model.IsActivated" value="' + employees[indice].IsActivated + '"/>');
-            td_form.append('<input type="hidden" name="model.RegisterDate" value="' + employees[indice].RegisterDate + '"/>');
-            td_form.append('<button type="submit" class=\"btnLink\">' + employees[indice].Id + '</button>');
+            var td_form = $('<form action="/Users/Update" method="post"></form>');
+            td_form.append('<input type="hidden" name="model.Id" value="' + users[indice].Id + '"/>');
+            td_form.append('<input type="hidden" name="model.Username" value="' + users[indice].Username + '"/>');
+            td_form.append('<input type="hidden" name="model.Password" value="' + users[indice].Password + '"/>');
+            td_form.append('<input type="hidden" name="model.AESKey" value="' + users[indice].AESKey + '"/>');
+            td_form.append('<input type="hidden" name="model.AESIV" value="' + users[indice].AESIV + '"/>');
+            td_form.append('<input type="hidden" name="model.ClientId" value="' + users[indice].ClientId + '"/>');
+            td_form.append('<input type="hidden" name="model.EmployeeId" value="' + users[indice].EmployeeId + '"/>');
+            td_form.append('<input type="hidden" name="model.IsActivated" value="' + users[indice].IsActivated + '"/>');
+            td_form.append('<button type="submit" class=\"btnLink\">' + users[indice].Id + '</button>');
             td_id.append(td_form);
             nova_linha = nova_linha.append(td_id);
-            nova_linha = nova_linha.append('<td>' + employees[indice].Name + '</td>');
-            nova_linha = nova_linha.append('<td>' + employees[indice].SSN + '</td>');
-            nova_linha = nova_linha.append('<td>' + employees[indice].Gender + '</td>');
-            nova_linha = nova_linha.append('<td>' + employees[indice].Salary + '</td>');
-            nova_linha = nova_linha.append('<td>' + employees[indice].CompanyName + '</td>');
-            nova_linha = nova_linha.append('<td>' + employees[indice].DepartmentName + '</td>');
-            nova_linha = nova_linha.append('<td>' + employees[indice].PositionName + '</td>');
-            nova_linha = nova_linha.append('<td>' + (employees[indice].IsActivated == true ? "Yes" : "No") + '</td>');
-            nova_linha = nova_linha.append('<td>' + ToJavaScriptDate(employees[indice].RegisterDate) + '</td>');
+            nova_linha = nova_linha.append('<td>' + users[indice].Username + '</td>');
+           
+            nova_linha = nova_linha.append('<td>' + (users[indice].ClientId == 1 ? "Yes" : "No") + '</td>');
+            nova_linha = nova_linha.append('<td>' + (users[indice].EmployeeId == 1 ? "Yes" : "No") + '</td>');
+            nova_linha = nova_linha.append('<td>' + (users[indice].IsActivated == true ? "Yes" : "No") + '</td>');
+            nova_linha = nova_linha.append('<td>' + ToJavaScriptDate(users[indice].RegisterDate) + '</td>');
             return nova_linha;
         }
 
@@ -395,8 +565,8 @@
 
             $('#tblBody').empty();
 
-            for (var i = 0; i < employees.length; i++) {
-                create_register = DynamicSearchConditions(CompanyObj.CityName, employees[i].CityName, obj_all_empty_fields);
+            for (var i = 0; i < users.length; i++) {
+                create_register = DynamicSearchConditions(CompanyObj.CityName, users[i].CityName, obj_all_empty_fields);
 
                 if (obj_all_empty_fields.all_empty_fields) {
                     $('#tblBody').empty();
@@ -424,6 +594,6 @@
 
             return create_register;
         }
-    </script>
+        </script>
 </body>
 </html>

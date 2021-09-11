@@ -12,6 +12,10 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -75,19 +79,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AESCrypt.cs" />
     <Compile Include="CityAppService.cs" />
+    <Compile Include="ClientAppService.cs" />
     <Compile Include="CompanyAppService.cs" />
     <Compile Include="CompanyProductAppService.cs" />
     <Compile Include="DepartmentAppService.cs" />
     <Compile Include="EmployeeAppService.cs" />
+    <Compile Include="FAQAppService.cs" />
     <Compile Include="Interfaces\ICityAppService.cs" />
+    <Compile Include="Interfaces\IClientAppService.cs" />
     <Compile Include="Interfaces\ICompanyAppService.cs" />
     <Compile Include="Interfaces\ICompanyProductAppService.cs" />
     <Compile Include="Interfaces\IDepartmentAppService.cs" />
     <Compile Include="Interfaces\IEmployeeAppService.cs" />
+    <Compile Include="Interfaces\IFAQAppService.cs" />
+    <Compile Include="Interfaces\IImageAppService.cs" />
+    <Compile Include="Interfaces\IKeywordAppService.cs" />
+    <Compile Include="Interfaces\IKeywordProductAppService.cs" />
+    <Compile Include="ImageAppService.cs" />
     <Compile Include="Interfaces\IPositionAppService.cs" />
     <Compile Include="Interfaces\IProductAppService.cs" />
     <Compile Include="Interfaces\IUserAppService.cs" />
+    <Compile Include="KeywordAppService.cs" />
+    <Compile Include="KeywordProductAppService.cs" />
     <Compile Include="PositionAppService.cs" />
     <Compile Include="ProductAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
